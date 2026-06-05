@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: tone-trainer
+    name: yuyin-tone-trainer
     runtime: python
     plan: free
     buildCommand: pip install -r requirements.txt
