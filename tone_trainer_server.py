@@ -9,8 +9,23 @@ from urllib.parse import unquote, urlparse
 
 
 ROOT = Path(__file__).resolve().parent
-DATA_PATH = Path(os.environ.get("TRAINER_DATA_PATH", ROOT / "trainer_data.private.json"))
+DEFAULT_DATA_PATHS = (
+    ROOT / "trainer_data.private.json",
+    ROOT / "trainer_data.json",
+)
 CODES_PATH = Path(os.environ.get("ACCESS_CODES_PATH", ROOT / "access_codes.private.json"))
+
+
+def default_data_path():
+    configured = os.environ.get("TRAINER_DATA_PATH")
+    if configured:
+        return Path(configured)
+
+    for path in DEFAULT_DATA_PATHS:
+        if path.exists():
+            return path
+
+    return DEFAULT_DATA_PATHS[-1]
 
 
 def load_json(path, env_key):
@@ -23,7 +38,7 @@ def load_json(path, env_key):
 
 
 def build_payload(code):
-    data = load_json(DATA_PATH, "TRAINER_DATA_JSON")
+    data = load_json(default_data_path(), "TRAINER_DATA_JSON")
     access_codes = load_json(CODES_PATH, "ACCESS_CODES_JSON")
     profile = access_codes.get(code)
     if not profile:

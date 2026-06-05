@@ -9,7 +9,5 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.12.4
-      - key: TRAINER_DATA_JSON
-        sync: false
       - key: ACCESS_CODES_JSON
         sync: false
