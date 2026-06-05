@@ -4,7 +4,7 @@ services:
     runtime: python
     plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: python tone_trainer_server.py
+    startCommand: python server.py
     healthCheckPath: /healthz
     envVars:
       - key: PYTHON_VERSION
