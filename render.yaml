@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: tone-trainer
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python tone_trainer_server.py
+    healthCheckPath: /healthz
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.4
+      - key: TRAINER_DATA_JSON
+        sync: false
+      - key: ACCESS_CODES_JSON
+        sync: false
