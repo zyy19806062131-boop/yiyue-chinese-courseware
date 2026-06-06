@@ -1,13 +1,5 @@
 services:
-  - type: web
-    name: yuyin-tone-trainer
-    runtime: python
-    plan: free
-    buildCommand: pip install -r requirements.txt
-    startCommand: python server.py
-    healthCheckPath: /healthz
-    envVars:
-      - key: PYTHON_VERSION
-        value: 3.12.4
-      - key: ACCESS_CODES_JSON
-        sync: false
+  - type: static_site
+    name: niki-hskk-toolbox
+    buildCommand: ""
+    staticPublishPath: .
