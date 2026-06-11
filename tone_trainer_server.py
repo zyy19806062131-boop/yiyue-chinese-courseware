@@ -318,10 +318,15 @@ def admin_page():
       <div class="row">
         <div>
           <h2>课程密码</h2>
-          <p class="meta">每行或逗号分隔一个访问密码。留空表示保留当前密码；输入新内容会替换这门课的旧密码。</p>
+          <p class="meta">最简单：在下面输入一个统一密码，点“应用到所有课件”，再点“保存”。</p>
           <p class="meta">保存后会立即生效；Render 重启或重新部署后可能恢复到仓库里的初始规则。</p>
         </div>
         <button id="saveBtn">保存全部</button>
+      </div>
+      <label for="globalPassword">统一课程密码</label>
+      <div class="row">
+        <input id="globalPassword" placeholder="例如：123456">
+        <button class="secondary" id="applyAllBtn">应用到所有课件</button>
       </div>
       <p class="status" id="saveStatus"></p>
       <div class="grid" id="lessons"></div>
@@ -360,11 +365,11 @@ def admin_page():
           <div class="meta"></div>
           <label>显示名称</label>
           <input class="title">
-          <label>替换访问密码</label>
-          <textarea class="passwords" placeholder="留空保留当前 ${lesson.passwordCount} 个密码"></textarea>
+          <label>这门课的新密码</label>
+          <input class="passwords" placeholder="不改就留空；想改就直接输入新密码">
         `;
         card.querySelector('h2').textContent = lesson.title;
-        card.querySelector('.meta').textContent = `${lesson.path} · 当前 ${lesson.passwordCount} 个密码`;
+        card.querySelector('.meta').textContent = `${lesson.path} · 当前状态：${lesson.passwordCount ? '已设置密码' : '还没有密码'}`;
         card.querySelector('.title').value = lesson.title;
         card.querySelector('.enabled').checked = lesson.enabled;
         lessonsEl.appendChild(card);
@@ -383,6 +388,20 @@ def admin_page():
     });
 
     document.getElementById('refreshBtn').addEventListener('click', () => loadRules().catch(() => {}));
+
+    document.getElementById('applyAllBtn').addEventListener('click', () => {
+      const password = document.getElementById('globalPassword').value.trim();
+      if (!password) {
+        saveStatus.className = 'status bad';
+        saveStatus.textContent = '请先输入统一课程密码。';
+        return;
+      }
+      document.querySelectorAll('.lesson .passwords').forEach(input => {
+        input.value = password;
+      });
+      saveStatus.className = 'status';
+      saveStatus.textContent = '已填入所有课件，点“保存全部”后生效。';
+    });
 
     document.getElementById('saveBtn').addEventListener('click', async () => {
       const lessons = [...document.querySelectorAll('.lesson')].map(card => ({
