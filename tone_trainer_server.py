@@ -18,7 +18,7 @@ from urllib.parse import parse_qs, unquote, urlparse
 ROOT = Path(__file__).resolve().parent
 RULES_PATH = ROOT / "data" / "access_rules.json"
 SESSION_SECRET = os.environ.get("SESSION_SECRET") or secrets.token_hex(32)
-DEFAULT_ADMIN_PASSWORD_HASH = "2c70831f7b3186ba254d0dd94d4e123cdaccc608644137ea790ec53b7e7e936f"
+DEFAULT_ADMIN_PASSWORD_HASH = "d13d2bff8c84535fa795b6b034d05a71210c189ec9e973b99feb3db830a8041e"
 ADMIN_PASSWORD_HASH = os.environ.get("ADMIN_PASSWORD_HASH", DEFAULT_ADMIN_PASSWORD_HASH)
 SESSION_COOKIE = "courseware_session"
 
