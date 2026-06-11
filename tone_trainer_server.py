@@ -318,6 +318,7 @@ def admin_page():
         <div>
           <h2>课程密码</h2>
           <p class="meta">每行或逗号分隔一个访问密码。留空表示保留当前密码；输入新内容会替换这门课的旧密码。</p>
+          <p class="meta">保存后会立即生效；Render 重启或重新部署后可能恢复到仓库里的初始规则。</p>
         </div>
         <button id="saveBtn">保存全部</button>
       </div>
