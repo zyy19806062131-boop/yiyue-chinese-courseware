@@ -50,17 +50,24 @@ def read_rules():
         path = normalize_lesson_path(item.get("path", ""))
         if not path:
             continue
+        passwords = [value for value in item.get("passwords", []) if isinstance(value, str) and value]
+        password_hashes = [
+            value
+            for value in item.get("password_hashes", [])
+            if isinstance(value, str) and value
+        ]
+        for password in passwords:
+            hashed = password_hash(password)
+            if hashed not in password_hashes:
+                password_hashes.append(hashed)
         lessons.append(
             {
                 "id": item.get("id") or path.replace("/", "-").replace(".html", ""),
                 "title": item.get("title") or path,
                 "path": path,
                 "enabled": bool(item.get("enabled", True)),
-                "password_hashes": [
-                    value
-                    for value in item.get("password_hashes", [])
-                    if isinstance(value, str) and value
-                ],
+                "passwords": passwords,
+                "password_hashes": password_hashes,
             }
         )
     return {"lessons": lessons}
@@ -306,18 +313,20 @@ def admin_page():
           <div class="meta"></div>
           <label>显示名称</label>
           <input class="title">
-          <label>这门课的新密码</label>
-          <input class="passwords" type="password">
+          <label>这门课的密码</label>
+          <input class="passwords">
           <div class="password-state"></div>
         `;
+        const visiblePasswords = lesson.passwords || [];
         const passwordText = lesson.passwordCount
-          ? `已设置 ${lesson.passwordCount} 个密码；为安全起见不显示明文。输入新密码会替换旧密码。`
+          ? `当前密码：${visiblePasswords.length ? visiblePasswords.join('，') : '旧密码无法显示，请重新设置一次。'}`
           : '还没有密码。输入一个新密码后点“保存全部”。';
         card.querySelector('h2').textContent = lesson.title;
         card.querySelector('.meta').textContent = `${lesson.path} · 当前状态：${lesson.passwordCount ? '已设置密码' : '还没有密码'}`;
         card.querySelector('.title').value = lesson.title;
         card.querySelector('.enabled').checked = lesson.enabled;
-        card.querySelector('.passwords').placeholder = lesson.passwordCount ? '已设置密码；留空则保持不变' : '输入这门课的新密码';
+        card.querySelector('.passwords').value = visiblePasswords.join('\\n');
+        card.querySelector('.passwords').placeholder = lesson.passwordCount ? '当前密码会显示在这里；可直接修改' : '输入这门课的新密码';
         card.querySelector('.password-state').textContent = passwordText;
         card.querySelector('.password-state').classList.toggle('empty', !lesson.passwordCount);
         lessonsEl.appendChild(card);
@@ -363,7 +372,7 @@ def admin_page():
         saveStatus.textContent = '保存中...';
         await api('/api/admin/rules', {method: 'POST', body: JSON.stringify({lessons})});
         saveStatus.className = 'status ok';
-        saveStatus.textContent = '已保存。密码已生效；后台不会显示明文密码。';
+        saveStatus.textContent = '已保存。后台会继续显示这些密码。';
         await loadRules();
       } catch (error) {
         saveStatus.className = 'status bad';
@@ -515,14 +524,17 @@ class CoursewareHandler(BaseHTTPRequestHandler):
             cleaned_passwords = [value.strip() for value in raw_passwords if value.strip()]
             if cleaned_passwords:
                 hashes = [password_hash(value) for value in cleaned_passwords]
+                passwords = cleaned_passwords
             else:
                 hashes = old.get("password_hashes", [])
+                passwords = old.get("passwords", [])
             lessons.append(
                 {
                     "id": old.get("id") or path.replace("/", "-").replace(".html", ""),
                     "title": str(item.get("title") or old.get("title") or path).strip(),
                     "path": path,
                     "enabled": bool(item.get("enabled", True)),
+                    "passwords": passwords,
                     "password_hashes": hashes,
                 }
             )
@@ -564,6 +576,7 @@ class CoursewareHandler(BaseHTTPRequestHandler):
                     "title": lesson["title"],
                     "path": lesson["path"],
                     "enabled": lesson["enabled"],
+                    "passwords": lesson.get("passwords", []),
                     "passwordCount": len(lesson.get("password_hashes", [])),
                 }
             )
