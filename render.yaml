@@ -1,6 +1,15 @@
 services:
   - type: web
-    runtime: static
     name: niki-hskk-toolbox
-    buildCommand: ""
-    staticPublishPath: .
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python server.py
+    healthCheckPath: /healthz
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.4
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: SESSION_SECRET
+        generateValue: true

@@ -1,0 +1,46 @@
+{
+  "lessons": [
+    {
+      "id": "lessons-culture-duanwu-v28",
+      "title": "端午节 · 龙舟与粽子",
+      "path": "lessons/culture/duanwu-v28.html",
+      "enabled": true,
+      "password_hashes": []
+    },
+    {
+      "id": "lessons-speaking-restaurant-ordering",
+      "title": "点餐与饮食文化｜Cinematic CFL v5",
+      "path": "lessons/speaking/restaurant-ordering.html",
+      "enabled": true,
+      "password_hashes": []
+    },
+    {
+      "id": "lessons-travel-xian-travel",
+      "title": "谈旅游｜新目标汉语口语 2 · Unit 6",
+      "path": "lessons/travel/xian-travel.html",
+      "enabled": true,
+      "password_hashes": []
+    },
+    {
+      "id": "tone_trainer",
+      "title": "声调旋律训练器 · Tone Melody Trainer",
+      "path": "tone_trainer.html",
+      "enabled": true,
+      "password_hashes": []
+    },
+    {
+      "id": "tone_trainer_voiced",
+      "title": "声调旋律训练器 · Tone Melody Trainer",
+      "path": "tone_trainer_voiced.html",
+      "enabled": true,
+      "password_hashes": []
+    },
+    {
+      "id": "travel_story_lesson",
+      "title": "林安的西安推荐",
+      "path": "travel_story_lesson.html",
+      "enabled": true,
+      "password_hashes": []
+    }
+  ]
+}
