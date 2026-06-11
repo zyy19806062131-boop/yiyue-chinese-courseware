@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: niki-hskk-toolbox
+    name: niki-hskk-courseware
     runtime: python
     plan: free
     buildCommand: pip install -r requirements.txt
