@@ -11,7 +11,7 @@
     },
     {
       "id": "lessons-speaking-restaurant-ordering",
-      "title": "点餐与饮食文化｜Cinematic CFL v5",
+      "title": "饭店点餐",
       "path": "lessons/speaking/restaurant-ordering.html",
       "enabled": true,
       "password_hashes": [
@@ -20,26 +20,8 @@
     },
     {
       "id": "lessons-travel-xian-travel",
-      "title": "谈旅游｜新目标汉语口语 2 · Unit 6",
+      "title": "谈旅游｜西安旅游",
       "path": "lessons/travel/xian-travel.html",
-      "enabled": true,
-      "password_hashes": [
-        "a73a5a1e7fc9bd069598751bee9a5ce559dcd96d73866a5f51a1a20c2cac498f"
-      ]
-    },
-    {
-      "id": "tone_trainer",
-      "title": "声调旋律训练器 · Tone Melody Trainer",
-      "path": "tone_trainer.html",
-      "enabled": true,
-      "password_hashes": [
-        "a73a5a1e7fc9bd069598751bee9a5ce559dcd96d73866a5f51a1a20c2cac498f"
-      ]
-    },
-    {
-      "id": "tone_trainer_voiced",
-      "title": "声调旋律训练器 · Tone Melody Trainer",
-      "path": "tone_trainer_voiced.html",
       "enabled": true,
       "password_hashes": [
         "a73a5a1e7fc9bd069598751bee9a5ce559dcd96d73866a5f51a1a20c2cac498f"
@@ -49,6 +31,123 @@
       "id": "travel_story_lesson",
       "title": "林安的西安推荐",
       "path": "travel_story_lesson.html",
+      "enabled": true,
+      "password_hashes": [
+        "a73a5a1e7fc9bd069598751bee9a5ce559dcd96d73866a5f51a1a20c2cac498f"
+      ]
+    },
+    {
+      "id": "tone_trainer",
+      "title": "声调旋律训练器",
+      "path": "tone_trainer.html",
+      "enabled": true,
+      "password_hashes": [
+        "a73a5a1e7fc9bd069598751bee9a5ce559dcd96d73866a5f51a1a20c2cac498f"
+      ]
+    },
+    {
+      "id": "tone_trainer_voiced",
+      "title": "声调旋律训练器 · 语音版",
+      "path": "tone_trainer_voiced.html",
+      "enabled": true,
+      "password_hashes": [
+        "a73a5a1e7fc9bd069598751bee9a5ce559dcd96d73866a5f51a1a20c2cac498f"
+      ]
+    },
+    {
+      "id": "YCT3_L3",
+      "title": "YCT3 · Lesson 3 入口",
+      "path": "YCT3_L3.html",
+      "enabled": true,
+      "password_hashes": [
+        "a73a5a1e7fc9bd069598751bee9a5ce559dcd96d73866a5f51a1a20c2cac498f"
+      ]
+    },
+    {
+      "id": "YCT3_L3_GAME_v6_experience_upgrade",
+      "title": "YCT3 L3 Block Quest · 我在画画儿呢",
+      "path": "YCT3_L3_GAME_v6_experience_upgrade.html",
+      "enabled": true,
+      "password_hashes": [
+        "a73a5a1e7fc9bd069598751bee9a5ce559dcd96d73866a5f51a1a20c2cac498f"
+      ]
+    },
+    {
+      "id": "baijiazhengmingV24",
+      "title": "百家争鸣：乱世里的四种秩序方案",
+      "path": "baijiazhengmingV24.html",
+      "enabled": true,
+      "password_hashes": [
+        "a73a5a1e7fc9bd069598751bee9a5ce559dcd96d73866a5f51a1a20c2cac498f"
+      ]
+    },
+    {
+      "id": "changjingkouyu-lesson01-lesson01_nihao_neighbor_final_v10_audio_fixed",
+      "title": "你好，邻居！",
+      "path": "changjingkouyu/lesson01/lesson01_nihao_neighbor_final_v10_audio_fixed.html",
+      "enabled": true,
+      "password_hashes": [
+        "a73a5a1e7fc9bd069598751bee9a5ce559dcd96d73866a5f51a1a20c2cac498f"
+      ]
+    },
+    {
+      "id": "TAMILA-",
+      "title": "7 Topics Speaking Lounge · HSK3-4",
+      "path": "TAMILA .html",
+      "enabled": true,
+      "password_hashes": [
+        "a73a5a1e7fc9bd069598751bee9a5ce559dcd96d73866a5f51a1a20c2cac498f"
+      ]
+    },
+    {
+      "id": "lessons-speaking-tamila-speaking-lounge",
+      "title": "TAMILA · Speaking Lounge 入口",
+      "path": "lessons/speaking/tamila-speaking-lounge.html",
+      "enabled": true,
+      "password_hashes": [
+        "a73a5a1e7fc9bd069598751bee9a5ce559dcd96d73866a5f51a1a20c2cac498f"
+      ]
+    },
+    {
+      "id": "lessons-tamila",
+      "title": "TAMILA · Speaking Lounge 入口",
+      "path": "lessons/tamila.html",
+      "enabled": true,
+      "password_hashes": [
+        "a73a5a1e7fc9bd069598751bee9a5ce559dcd96d73866a5f51a1a20c2cac498f"
+      ]
+    },
+    {
+      "id": "t-index",
+      "title": "TAMILA 入口",
+      "path": "t/index.html",
+      "enabled": true,
+      "password_hashes": [
+        "a73a5a1e7fc9bd069598751bee9a5ce559dcd96d73866a5f51a1a20c2cac498f"
+      ]
+    },
+    {
+      "id": "lessons-speaking-hskk-picture-speaking-advanced-02",
+      "title": "HSKK 看图说话进阶练习入口",
+      "path": "lessons/speaking/hskk-picture-speaking-advanced-02.html",
+      "enabled": true,
+      "password_hashes": [
+        "a73a5a1e7fc9bd069598751bee9a5ce559dcd96d73866a5f51a1a20c2cac498f"
+      ]
+    },
+    {
+      "id": "lessons-speaking-hskk-picture-speaking-advanced-02",
+      "title": "HSKK 看图说话 · 进阶刷量",
+      "path": "lessons/speaking/hskk-picture-speaking-advanced-02.html.html",
+      "enabled": true,
+      "password_hashes": [
+        "a73a5a1e7fc9bd069598751bee9a5ce559dcd96d73866a5f51a1a20c2cac498f"
+      ]
+    },
+    {
+      "id": "lessons-speaking-niki-hskk-toolbox",
+      "title": "Niki HSKK 看图说话",
+      "path": "lessons/speaking/niki-hskk-toolbox.html",
       "enabled": true,
       "password_hashes": [
         "a73a5a1e7fc9bd069598751bee9a5ce559dcd96d73866a5f51a1a20c2cac498f"

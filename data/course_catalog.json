@@ -1,0 +1,182 @@
+[
+  {
+    "id": "duanwu-v28",
+    "title": "端午节 · 龙舟与粽子",
+    "category": "culture",
+    "categoryName": "文化专题",
+    "subtitle": "用节日故事、场景表达和文化任务进入端午主题。",
+    "path": "lessons/culture/duanwu-v28.html",
+    "tags": [
+      "端午节",
+      "文化",
+      "V28"
+    ],
+    "thumbnail": "assets/duanwu-v28/img-009-1d9b4cd5fe619c40.jpg",
+    "search": "端午节 龙舟 粽子 文化 duanwu festival"
+  },
+  {
+    "id": "xian-travel",
+    "title": "谈旅游｜西安旅游",
+    "category": "travel",
+    "categoryName": "旅游表达",
+    "subtitle": "围绕西安行程、景点推荐和旅行表达做口语练习。",
+    "path": "lessons/travel/xian-travel.html",
+    "tags": [
+      "西安",
+      "旅游",
+      "Unit 6"
+    ],
+    "thumbnail": "assets/travel_story/scene-01-opening.png",
+    "search": "谈旅游 西安 旅行 新目标汉语口语 unit 6 travel xian"
+  },
+  {
+    "id": "restaurant-ordering",
+    "title": "饭店点餐",
+    "category": "speaking",
+    "categoryName": "场景口语",
+    "subtitle": "从入座、看菜单、点菜到表达口味，完成一组餐厅任务。",
+    "path": "lessons/speaking/restaurant-ordering.html",
+    "tags": [
+      "点餐",
+      "餐厅",
+      "Speaking"
+    ],
+    "initials": "点餐",
+    "search": "饭店 点餐 餐厅 菜单 饮食文化 restaurant ordering speaking"
+  },
+  {
+    "id": "travel-story",
+    "title": "林安的西安推荐",
+    "category": "travel",
+    "categoryName": "旅游表达",
+    "subtitle": "西安推荐主题故事课件，适合旅行表达和推荐理由练习。",
+    "path": "travel_story_lesson.html",
+    "tags": [
+      "西安",
+      "推荐",
+      "Story"
+    ],
+    "thumbnail": "assets/travel_story/scene-05-finish.png",
+    "search": "林安 西安 推荐 旅行 travel story"
+  },
+  {
+    "id": "tone-trainer",
+    "title": "声调旋律训练器",
+    "category": "tools",
+    "categoryName": "训练工具",
+    "subtitle": "普通话声调旋律训练器，适合课前热身和发音专项练习。",
+    "path": "tone_trainer.html",
+    "tags": [
+      "声调",
+      "发音",
+      "Trainer"
+    ],
+    "initials": "声调",
+    "search": "声调 旋律 普通话 发音 tone trainer"
+  },
+  {
+    "id": "tone-trainer-voiced",
+    "title": "声调旋律训练器 · 语音版",
+    "category": "tools",
+    "categoryName": "训练工具",
+    "subtitle": "带语音素材的声调练习版本，用于听辨和跟读。",
+    "path": "tone_trainer_voiced.html",
+    "tags": [
+      "声调",
+      "语音",
+      "Audio"
+    ],
+    "initials": "语音",
+    "search": "声调 旋律 语音 voiced audio tone trainer"
+  },
+  {
+    "id": "yct3-l3-game",
+    "title": "YCT3 L3 · 我在画画儿呢",
+    "category": "yct",
+    "categoryName": "少儿中文",
+    "subtitle": "Minecraft 风格任务地图课件，练习正在进行的动作表达。",
+    "path": "YCT3_L3_GAME_v6_experience_upgrade.html",
+    "tags": [
+      "YCT3",
+      "游戏化",
+      "动作"
+    ],
+    "initials": "YCT",
+    "search": "YCT3 我在画画儿呢 game minecraft kids drawing"
+  },
+  {
+    "id": "baijiazhengming",
+    "title": "百家争鸣",
+    "category": "culture",
+    "categoryName": "文化专题",
+    "subtitle": "乱世里的四种秩序方案，中国思想文化专题互动页。",
+    "path": "baijiazhengmingV24.html",
+    "tags": [
+      "历史",
+      "文化",
+      "思想"
+    ],
+    "initials": "百家",
+    "search": "百家争鸣 历史 文化 思想 儒家 道家 法家 墨家"
+  },
+  {
+    "id": "nihao-neighbor",
+    "title": "你好，邻居！",
+    "category": "speaking",
+    "categoryName": "场景口语",
+    "subtitle": "搬进新公寓后和邻居打招呼、介绍自己、加微信。",
+    "path": "changjingkouyu/lesson01/lesson01_nihao_neighbor_final_v10_audio_fixed.html",
+    "tags": [
+      "邻居",
+      "介绍",
+      "Audio"
+    ],
+    "initials": "邻居",
+    "search": "你好 邻居 场景口语 介绍自己 微信 apartment neighbor speaking audio"
+  },
+  {
+    "id": "tamila-speaking",
+    "title": "7 Topics Speaking Lounge",
+    "category": "speaking",
+    "categoryName": "场景口语",
+    "subtitle": "HSK3-4 口语主题训练，围绕多个话题展开表达。",
+    "path": "TAMILA%20.html",
+    "tags": [
+      "HSK3-4",
+      "Speaking",
+      "Topics"
+    ],
+    "initials": "7题",
+    "search": "TAMILA 7 topics speaking lounge HSK3 HSK4 口语 话题"
+  },
+  {
+    "id": "hskk-picture-advanced",
+    "title": "HSKK 看图说话 · 进阶刷量",
+    "category": "speaking",
+    "categoryName": "场景口语",
+    "subtitle": "12 个高信息量图片场景，支持默想、倒计时和录音记忆。",
+    "path": "lessons/speaking/hskk-picture-speaking-advanced-02.html.html",
+    "tags": [
+      "HSKK",
+      "看图说话",
+      "录音"
+    ],
+    "initials": "HSKK",
+    "search": "HSKK 看图说话 进阶 图片 录音 倒计时 speaking picture"
+  },
+  {
+    "id": "niki-hskk-toolbox",
+    "title": "Niki HSKK 看图说话",
+    "category": "speaking",
+    "categoryName": "场景口语",
+    "subtitle": "大屏优化三栏工具箱，支持录音记忆与看图说话练习。",
+    "path": "lessons/speaking/niki-hskk-toolbox.html",
+    "tags": [
+      "HSKK",
+      "工具箱",
+      "录音"
+    ],
+    "initials": "Niki",
+    "search": "Niki HSKK 看图说话 工具箱 录音 大屏 picture speaking"
+  }
+]

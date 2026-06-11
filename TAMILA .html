@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7 Topics Speaking Lounge · HSK3–4</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif+SC:wght@500;600;700;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f7f1e8;
+      --paper:#fffaf2;
+      --ink:#24211f;
+      --muted:#7c7168;
+      --soft:#e7ded2;
+      --line:rgba(52,40,32,.14);
+      --accent:#b88a4e;
+      --accent2:#6a8f94;
+      --shadow:0 30px 90px rgba(76,57,38,.15);
+      --radius:32px;
+      --sans:'Inter','Noto Sans SC',system-ui,sans-serif;
+      --serif:'Noto Serif SC',serif;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+      overflow-x:hidden;
+    }
+    body::before{
+      content:"";position:fixed;inset:-15%;z-index:-3;pointer-events:none;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255,255,255,.9), transparent 28%),
+        radial-gradient(circle at 80% 10%, color-mix(in srgb, var(--accent) 26%, transparent), transparent 24%),
+        radial-gradient(circle at 60% 80%, color-mix(in srgb, var(--accent2) 20%, transparent), transparent 28%);
+      filter:blur(20px);animation:breath 14s ease-in-out infinite alternate;
+    }
+    @keyframes breath{to{transform:translate3d(2.5%, -1.5%, 0) scale(1.04)}}
+    a{color:inherit;text-decoration:none}
+    button{font-family:inherit;color:inherit}
+
+    .topbar{
+      position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:50;
+      width:min(1120px,calc(100vw - 32px));height:58px;border:1px solid rgba(255,255,255,.6);
+      background:rgba(255,250,242,.72);backdrop-filter:blur(24px);border-radius:999px;
+      display:flex;align-items:center;justify-content:space-between;padding:0 10px 0 22px;
+      box-shadow:0 12px 42px rgba(40,31,23,.08);
+    }
+    .brand{display:flex;gap:12px;align-items:center;font-weight:800;letter-spacing:-.02em}
+    .brand-dot{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 10px 25px color-mix(in srgb,var(--accent) 36%, transparent)}
+    .nav{display:flex;gap:4px;align-items:center;overflow:auto;max-width:72%;scrollbar-width:none}
+    .nav::-webkit-scrollbar{display:none}
+    .nav a{font-size:13px;font-weight:700;color:var(--muted);padding:10px 12px;border-radius:999px;white-space:nowrap;transition:.25s ease}
+    .nav a:hover,.nav a.active{background:rgba(255,255,255,.7);color:var(--ink)}
+    .progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));z-index:60}
+
+    section.slide{
+      min-height:100vh;padding:112px max(24px,calc((100vw - 1180px)/2)) 72px;
+      position:relative;display:flex;align-items:center;
+    }
+    .slide-inner{width:100%}
+    .eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:900;color:var(--accent);margin-bottom:16px}
+    h1,h2,h3{margin:0;font-family:var(--serif);line-height:1.04;letter-spacing:-.045em;color:var(--ink)}
+    h1{font-size:clamp(46px,6.8vw,86px);max-width:820px}
+    h2{font-size:clamp(34px,4.8vw,64px);max-width:760px}
+    h3{font-size:clamp(24px,3vw,42px)}
+    .sub{font-size:clamp(15px,1.35vw,19px);line-height:1.75;color:var(--muted);max-width:620px;margin:18px 0 0}
+    .tiny{font-size:13px;color:var(--muted);line-height:1.75}.pinyin{font-size:13px;color:color-mix(in srgb,var(--muted) 76%, white);letter-spacing:.04em}.en{font-size:13px;color:var(--muted)}
+
+    .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:42px;align-items:center}
+    .hero-visual{position:relative;min-height:620px;border-radius:48px;overflow:hidden;box-shadow:var(--shadow);background:var(--soft);isolation:isolate}
+    .hero-visual::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.26));z-index:1}
+    .hero-visual img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;transform:scale(1.04);animation:kenburns 18s ease-in-out infinite alternate}
+    @keyframes kenburns{to{transform:scale(1.13) translate3d(-2%,1%,0)}}
+    .photo-note{position:absolute;left:28px;right:28px;bottom:28px;z-index:2;background:rgba(255,250,242,.76);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.58);border-radius:28px;padding:22px 24px;box-shadow:0 20px 70px rgba(0,0,0,.18)}
+    .photo-note strong{display:block;font-size:20px;margin-bottom:6px}.photo-note span{color:var(--muted);line-height:1.55}
+    .soft-pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:rgba(255,255,255,.54);padding:9px 14px;border-radius:999px;color:var(--muted);font-size:13px;font-weight:700;margin:8px 8px 0 0}
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:36px}
+    .btn{border:0;border-radius:999px;background:var(--ink);color:#fff;padding:15px 22px;font-weight:800;cursor:pointer;box-shadow:0 15px 40px rgba(0,0,0,.14);transition:.24s ease}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 18px 52px rgba(0,0,0,.18)}
+    .btn.ghost{background:rgba(255,255,255,.56);color:var(--ink);border:1px solid var(--line);box-shadow:none}
+
+    .topic-map{display:grid;grid-template-columns:repeat(7,minmax(180px,1fr));gap:18px;margin-top:42px;overflow-x:auto;padding-bottom:16px;scroll-snap-type:x mandatory}
+    .topic-tile{min-height:260px;border-radius:34px;padding:24px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 22px 62px rgba(72,53,36,.12);scroll-snap-align:start;border:1px solid rgba(255,255,255,.55);background:var(--paper);transition:.32s ease;isolation:isolate}
+    .topic-tile:hover{transform:translateY(-7px)}
+    .topic-tile::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.38));z-index:-1}.topic-tile::after{content:"";position:absolute;inset:0;background:var(--img);background-size:cover;background-position:center;z-index:-2;transition:.5s ease}.topic-tile:hover::after{transform:scale(1.07)}
+    .topic-num{width:36px;height:36px;display:grid;place-items:center;border-radius:50%;background:rgba(255,255,255,.7);font-weight:900}.topic-tile h3{font-size:24px;color:#fff;text-shadow:0 8px 32px rgba(0,0,0,.28);letter-spacing:-.04em}.topic-tile .pinyin,.topic-tile .en{color:rgba(255,255,255,.78)}
+
+    .split{display:grid;grid-template-columns:.92fr 1.08fr;gap:44px;align-items:center}.split.reverse{grid-template-columns:1.08fr .92fr}
+    .panel{background:rgba(255,250,242,.64);border:1px solid rgba(255,255,255,.6);border-radius:42px;padding:32px;box-shadow:var(--shadow);backdrop-filter:blur(26px)}
+    .image-card{min-height:620px;border-radius:46px;overflow:hidden;position:relative;box-shadow:var(--shadow);background:var(--soft);isolation:isolate}
+    .image-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:.8s ease}.image-card:hover img{transform:scale(1.05)}
+    .image-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(0,0,0,.48))}.caption{position:absolute;left:26px;right:26px;bottom:26px;z-index:2;color:#fff}.caption b{display:block;font-size:22px}.caption span{display:block;opacity:.82;margin-top:8px;line-height:1.5}
+
+    .mood-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:28px}.mood{border:1px solid var(--line);background:rgba(255,255,255,.56);border-radius:26px;padding:18px;text-align:left;cursor:pointer;min-height:118px;transition:.25s ease}.mood:hover,.mood.active{background:var(--paper);transform:translateY(-4px);box-shadow:0 18px 45px rgba(80,58,39,.11);border-color:color-mix(in srgb,var(--accent) 45%, var(--line))}.mood strong{display:block;font-size:18px}.mood span{display:block;margin-top:7px;color:var(--muted);font-size:13px;line-height:1.5}.response{margin-top:18px;border-radius:24px;background:linear-gradient(135deg,rgba(255,255,255,.7),color-mix(in srgb,var(--accent) 12%, white));border:1px solid var(--line);padding:18px 20px;color:var(--ink);line-height:1.7;display:none}.response.show{display:block;animation:rise .35s ease both}
+    @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+    .difficulty{display:flex;gap:8px;flex-wrap:wrap;margin:24px 0 18px}.diff-btn{border:1px solid var(--line);background:rgba(255,255,255,.55);padding:11px 15px;border-radius:999px;font-weight:900;cursor:pointer;color:var(--muted)}.diff-btn.active{background:var(--ink);color:#fff;border-color:transparent}.question-card{border-radius:34px;background:var(--paper);padding:28px;border:1px solid rgba(255,255,255,.68);box-shadow:0 18px 55px rgba(60,45,35,.1);min-height:192px}.question-card .q{font-family:var(--sans);font-weight:700;font-size:clamp(22px,2.6vw,38px);line-height:1.35;letter-spacing:-.03em}.question-card .hint{margin-top:18px;color:var(--muted);font-size:17px;line-height:1.8}
+    .reveal-btn{margin-top:18px;border:0;background:color-mix(in srgb,var(--accent) 16%, white);color:var(--ink);border-radius:999px;padding:12px 16px;font-weight:900;cursor:pointer}.drawer{display:none;margin-top:14px;border-left:3px solid var(--accent);background:rgba(255,255,255,.58);padding:16px 18px;border-radius:0 20px 20px 0;color:var(--muted);line-height:1.8}.drawer.open{display:block;animation:rise .28s ease both}
+
+    .chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}.chip{border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.58);padding:10px 14px;font-weight:800;cursor:pointer;transition:.22s ease}.chip:hover,.chip.active{background:var(--ink);color:#fff;transform:translateY(-2px)}.chip-card{margin-top:16px;border-radius:26px;background:rgba(255,255,255,.62);border:1px solid var(--line);padding:20px;display:none}.chip-card.show{display:block;animation:rise .3s ease both}.chip-card b{font-size:28px;font-family:var(--serif)}.chip-card .sample{margin-top:12px;font-size:18px;line-height:1.7}
+
+    .timeline{display:grid;gap:14px;margin-top:24px}.time-row{display:grid;grid-template-columns:64px 1fr;gap:16px;align-items:start}.time-dot{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-weight:900;box-shadow:0 12px 35px color-mix(in srgb,var(--accent) 28%, transparent)}.time-card{background:rgba(255,255,255,.58);border:1px solid var(--line);border-radius:28px;padding:18px 20px}.time-card b{font-size:18px}.time-card p{margin:8px 0 0;color:var(--muted);line-height:1.65}
+
+    .ladder{margin-top:24px;background:rgba(255,255,255,.6);border:1px solid var(--line);border-radius:34px;padding:24px}.ladder-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:18px}.step{border-radius:22px;background:var(--paper);border:1px solid rgba(255,255,255,.75);padding:16px;min-height:126px;position:relative;overflow:hidden}.step::before{content:attr(data-step);position:absolute;right:12px;top:8px;font-size:46px;font-weight:900;color:color-mix(in srgb,var(--accent) 18%, transparent);line-height:1}.step b{display:block;margin-bottom:10px}.step p{margin:0;color:var(--muted);line-height:1.55;font-size:14px}
+
+    .cards-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}.choice-card{border:1px solid var(--line);background:rgba(255,255,255,.58);border-radius:30px;padding:22px;cursor:pointer;transition:.25s ease}.choice-card:hover,.choice-card.active{background:var(--paper);transform:translateY(-4px);box-shadow:0 16px 46px rgba(54,43,35,.1)}.choice-card strong{font-size:22px;display:block}.choice-card span{display:block;margin-top:10px;color:var(--muted);line-height:1.6}.opinion-scale{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}.scale-btn{border:1px solid var(--line);background:rgba(255,255,255,.58);border-radius:24px;padding:18px 12px;font-weight:900;cursor:pointer;transition:.25s ease}.scale-btn:hover,.scale-btn.active{background:var(--ink);color:#fff}.opinion-output{margin-top:16px;border-radius:28px;background:var(--paper);padding:22px;border:1px solid rgba(255,255,255,.72);display:none;line-height:1.75;color:var(--muted)}.opinion-output.show{display:block;animation:rise .28s ease both}
+
+    .phone-flow{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:28px}.phone-scene{min-height:172px;border-radius:30px;overflow:hidden;position:relative;padding:18px;display:flex;align-items:end;color:#fff;cursor:pointer;isolation:isolate;border:1px solid rgba(255,255,255,.32)}.phone-scene::before{content:"";position:absolute;inset:0;background:var(--scene);background-size:cover;background-position:center;z-index:-2;transition:.6s ease}.phone-scene::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.55));z-index:-1}.phone-scene:hover::before{transform:scale(1.08)}.phone-scene b{font-size:18px;text-shadow:0 8px 24px rgba(0,0,0,.28)}.scene-output{margin-top:18px;background:rgba(255,255,255,.62);border:1px solid var(--line);border-radius:28px;padding:20px;display:none;color:var(--muted);line-height:1.75}.scene-output.show{display:block;animation:rise .3s ease both}
+
+    .stage{display:grid;grid-template-columns:.8fr 1.2fr;gap:26px;align-items:stretch}.timer-card{background:var(--ink);color:#fff;border-radius:44px;padding:30px;box-shadow:var(--shadow);min-height:520px;display:flex;flex-direction:column;justify-content:space-between}.timer-ring{width:240px;height:240px;border-radius:50%;display:grid;place-items:center;margin:24px auto;background:conic-gradient(var(--accent) var(--deg,0deg),rgba(255,255,255,.14) 0);position:relative}.timer-ring::before{content:"";position:absolute;inset:14px;border-radius:50%;background:var(--ink)}.timer-text{position:relative;z-index:1;font-size:50px;font-weight:900;letter-spacing:-.04em}.timer-buttons{display:flex;gap:9px;justify-content:center;flex-wrap:wrap}.timer-buttons button{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.1);color:#fff;border-radius:999px;padding:12px 16px;font-weight:900;cursor:pointer}.rubric{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:22px}.rubric div{border-radius:24px;border:1px solid var(--line);background:rgba(255,255,255,.56);padding:18px}.rubric b{display:block;margin-bottom:8px}.rubric span{color:var(--muted);font-size:14px;line-height:1.5}
+
+    .feedback{margin-top:24px;border-radius:34px;background:linear-gradient(135deg,rgba(255,255,255,.72),color-mix(in srgb,var(--accent2) 12%, white));border:1px solid var(--line);padding:24px}.feedback h3{font-size:30px;margin-bottom:14px}.feedback-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.feedback-grid div{background:rgba(255,255,255,.62);border-radius:22px;padding:16px;color:var(--muted);line-height:1.6}.feedback-grid b{color:var(--ink);display:block;margin-bottom:8px}
+
+
+    .hero.compact-hero{grid-template-columns:.9fr 1.1fr;gap:36px}
+    .compact-hero .hero-visual{min-height:560px}
+    .compact-hero .hero-visual img{object-position:center 55%}
+    .cover-kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--muted);margin-bottom:18px}
+    .cover-note{margin-top:18px;color:var(--muted);font-size:15px;line-height:1.8;max-width:460px}
+    .map-clean .slide-inner{width:100%}
+    .map-clean .topic-map{margin-top:0;grid-template-columns:repeat(4,minmax(0,1fr));overflow:visible;scroll-snap-type:none}
+    .map-clean .topic-tile{min-height:220px;padding:20px;border-radius:28px}
+    .map-clean .topic-tile h3{font-size:22px}
+    .map-clean .topic-tile .en,.map-clean .topic-tile .pinyin{font-size:12px}
+    .lang-tools{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;margin:0 0 18px}
+    .lang-toggle{border:1px solid var(--line);background:rgba(255,255,255,.55);padding:9px 12px;border-radius:999px;font-weight:800;font-size:12px;cursor:pointer;color:var(--muted)}
+    .lang-toggle.active{background:var(--ink);color:#fff;border-color:transparent}
+    .study-stack{display:grid;gap:10px;margin-top:14px}
+    .study-unit{border:1px solid var(--line);background:rgba(255,255,255,.54);padding:14px 16px;border-radius:18px}
+    .study-unit .zh{font-size:16px;line-height:1.7;color:var(--ink)}
+    .study-unit .pyline,.study-unit .enline{display:none;font-size:13px;line-height:1.65;color:var(--muted);margin-top:6px}
+    .show-py .study-unit .pyline{display:block}
+    .show-en .study-unit .enline{display:block}
+    .study-grid{display:grid;gap:12px;margin-top:16px}
+    .study-card{border-radius:20px;padding:16px 18px;background:rgba(255,255,255,.48);border:1px solid var(--line)}
+    .study-card b{display:block;margin-bottom:6px}
+    .study-card .zh{font-size:16px;line-height:1.7}
+    .study-card .pyline,.study-card .enline{display:none;font-size:13px;line-height:1.65;color:var(--muted);margin-top:6px}
+    .show-py .study-card .pyline{display:block}
+    .show-en .study-card .enline{display:block}
+    .minimal-head{margin-bottom:18px}
+    .minimal-head h2{margin-bottom:8px}
+    @media(max-width:980px){.map-clean .topic-map{grid-template-columns:repeat(2,minmax(0,1fr))}.hero.compact-hero{grid-template-columns:1fr}.lang-tools{justify-content:flex-start}}
+    @media(max-width:640px){.map-clean .topic-map{grid-template-columns:1fr 1fr}.compact-hero .hero-visual{min-height:380px}}
+
+    /* Lesson 2 spacious editorial layouts */
+    .lesson2-gate{display:grid;grid-template-columns:.85fr 1.15fr;gap:28px;align-items:stretch}
+    .lesson2-gate .gate-copy{padding:20px 0}
+    .cinema-row{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .cinema-card{position:relative;min-height:420px;border-radius:34px;overflow:hidden;display:flex;align-items:flex-end;padding:24px;border:1px solid rgba(255,255,255,.18);box-shadow:0 30px 85px rgba(0,0,0,.22);isolation:isolate;transition:.32s ease}
+    .cinema-card:hover{transform:translateY(-8px)}
+    .cinema-card::before{content:"";position:absolute;inset:0;background:var(--poster);background-size:cover;background-position:center;z-index:-2;transition:.7s ease}
+    .cinema-card:hover::before{transform:scale(1.06)}
+    .cinema-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.06),rgba(0,0,0,.72));z-index:-1}
+    .cinema-card .num{position:absolute;top:20px;left:20px;width:42px;height:42px;border-radius:999px;background:rgba(255,255,255,.78);color:#1d2730;display:grid;place-items:center;font-weight:900}
+    .cinema-card h3{color:#fff;font-size:28px;line-height:1.16;margin-bottom:8px}
+    .cinema-card p{color:rgba(255,255,255,.76);font-size:13px;line-height:1.6;margin:0}
+    .big-topic{display:grid;grid-template-columns:.96fr 1.04fr;gap:42px;align-items:center}
+    .big-topic.reverse{grid-template-columns:1.04fr .96fr}
+    .wide-panel{background:rgba(255,250,242,.66);border:1px solid rgba(255,255,255,.62);border-radius:42px;padding:36px;box-shadow:var(--shadow);backdrop-filter:blur(26px)}
+    .theme-night .wide-panel{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14);box-shadow:0 30px 90px rgba(0,0,0,.22)}
+    .focus-question{font-family:var(--sans);font-size:clamp(28px,3.4vw,48px);font-weight:800;line-height:1.22;letter-spacing:-.04em;margin:8px 0 18px}
+    .large-answer{margin-top:20px;border-radius:30px;padding:24px 26px;background:rgba(255,255,255,.56);border:1px solid var(--line);line-height:1.9}
+    .theme-night .large-answer{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14)}
+    .large-answer .zh{font-size:18px;line-height:1.9}
+    .large-answer .pyline,.large-answer .enline{display:none;color:var(--muted);font-size:14px;line-height:1.75;margin-top:8px}
+    .show-py .large-answer .pyline{display:block}.show-en .large-answer .enline{display:block}
+    .segment-tabs{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}
+    .segment-tab{border:1px solid var(--line);background:rgba(255,255,255,.5);padding:12px 16px;border-radius:999px;color:var(--muted);font-weight:850;cursor:pointer;transition:.22s ease}
+    .theme-night .segment-tab{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14)}
+    .segment-tab.active{background:var(--ink);color:var(--bg);border-color:transparent}
+    .theme-night .segment-tab.active{background:#fff;color:#101827}
+    .prompt-list{display:grid;gap:12px;margin-top:18px}
+    .prompt-line{display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:start;padding:18px 0;border-bottom:1px solid var(--line)}
+    .prompt-line:last-child{border-bottom:0}
+    .prompt-line .dot{width:34px;height:34px;border-radius:999px;background:color-mix(in srgb,var(--accent) 18%, white);display:grid;place-items:center;font-weight:900;color:var(--ink)}
+    .theme-night .prompt-line .dot{background:rgba(255,255,255,.12);color:#fff}
+    .prompt-line .zh{font-size:18px;line-height:1.7;color:var(--ink)}
+    .prompt-line .pyline,.prompt-line .enline{display:none;font-size:13px;color:var(--muted);line-height:1.65;margin-top:5px}
+    .show-py .prompt-line .pyline{display:block}.show-en .prompt-line .enline{display:block}
+    .two-column-text{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:22px}
+    .soft-block{padding:24px;border-radius:28px;background:rgba(255,255,255,.5);border:1px solid var(--line)}
+    .theme-night .soft-block{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14)}
+    .soft-block h3{font-family:var(--sans);font-size:19px;letter-spacing:-.02em;margin-bottom:14px}
+    .soft-block ul{margin:0;padding-left:18px;color:var(--muted);line-height:1.95}
+    .dialogue-stream{display:grid;gap:14px;margin-top:20px}
+    .bubble-line{max-width:88%;padding:16px 18px;border-radius:24px;background:rgba(255,255,255,.58);border:1px solid var(--line)}
+    .bubble-line:nth-child(even){justify-self:end;background:color-mix(in srgb,var(--accent) 12%, white)}
+    .theme-night .bubble-line{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14)}
+    .theme-night .bubble-line:nth-child(even){background:rgba(240,168,107,.14)}
+    .bubble-line .zh{font-size:17px;line-height:1.65}
+    .bubble-line .pyline,.bubble-line .enline{display:none;font-size:13px;color:var(--muted);line-height:1.6;margin-top:5px}
+    .show-py .bubble-line .pyline{display:block}.show-en .bubble-line .enline{display:block}
+    .scene-band{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}
+    .scene-band .phone-scene{min-height:230px;border-radius:30px}
+    .expanded-output{margin-top:22px}
+    @media(max-width:980px){.lesson2-gate,.big-topic,.big-topic.reverse{grid-template-columns:1fr}.cinema-row{grid-template-columns:1fr}.cinema-card{min-height:300px}.two-column-text,.scene-band{grid-template-columns:1fr}}
+
+
+    /* v5 readability refinements: fewer vertical boxes, more horizontal breathing room */
+    .cards-2{grid-template-columns:1fr!important;gap:12px!important}
+    .choice-card{
+      min-height:0!important;
+      padding:18px 22px!important;
+      border-radius:24px!important;
+      display:grid!important;
+      grid-template-columns:minmax(150px,.34fr) 1fr!important;
+      gap:18px!important;
+      align-items:center!important;
+    }
+    .choice-card strong{font-size:18px;line-height:1.45}
+    .choice-card span{margin-top:0!important;line-height:1.75!important}
+
+    .mood-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+    .mood{
+      min-height:0!important;
+      padding:16px 20px!important;
+      border-radius:24px!important;
+      display:grid!important;
+      grid-template-columns:minmax(120px,.36fr) 1fr!important;
+      gap:14px!important;
+      align-items:center!important;
+    }
+    .mood span{margin-top:0!important}
+
+    .timeline{display:grid!important;gap:12px!important;margin-top:22px!important}
+    .time-row{
+      display:grid!important;
+      grid-template-columns:46px 1fr!important;
+      gap:16px!important;
+      align-items:stretch!important;
+      margin:0!important;
+    }
+    .time-row::before{display:none!important}
+    .time-dot{position:relative!important;left:auto!important;top:auto!important;margin:0!important;width:46px!important;height:46px!important}
+    .time-card{
+      margin:0!important;
+      padding:18px 22px!important;
+      min-height:0!important;
+      border-radius:24px!important;
+    }
+    .time-card p{margin:6px 0 0!important;line-height:1.85!important}
+
+    .study-grid{grid-template-columns:1fr!important;gap:12px!important}
+    .study-card{
+      padding:18px 22px!important;
+      border-radius:24px!important;
+    }
+    .study-card b{
+      font-size:14px;
+      color:var(--accent);
+      letter-spacing:.04em;
+      margin-bottom:8px!important;
+    }
+
+    .ladder-steps{grid-template-columns:1fr!important;gap:10px!important}
+    .step{
+      display:grid!important;
+      grid-template-columns:120px 1fr!important;
+      align-items:center!important;
+      min-height:0!important;
+      padding:16px 20px!important;
+      border-radius:22px!important;
+    }
+    .step p{margin:0!important;line-height:1.75!important}
+
+    .prompt-line{
+      grid-template-columns:42px 1fr!important;
+      padding:18px 0!important;
+    }
+    .prompt-line .zh{font-size:17px!important;line-height:1.85!important}
+
+    .dialogue-stream{gap:16px!important}
+    .bubble-line{
+      max-width:96%!important;
+      padding:18px 22px!important;
+      border-radius:26px!important;
+    }
+
+    .large-answer{padding:24px 28px!important}
+    .large-answer .zh,
+    .study-unit .zh,
+    .study-card .zh,
+    .bubble-line .zh,
+    .scene-output .zh,
+    .opinion-output .zh{
+      line-height:1.95!important;
+    }
+
+    .caption{
+      left:22px!important;
+      right:22px!important;
+      bottom:18px!important;
+      max-width:calc(100% - 44px)!important;
+    }
+    .caption b{
+      font-size:clamp(18px,1.6vw,24px)!important;
+      line-height:1.25!important;
+      text-wrap:balance;
+    }
+    .caption span{font-size:14px!important;line-height:1.65!important}
+    .image-card img{object-position:center 58%!important}
+    .hero-visual img{object-position:center 58%!important}
+
+    .question-card{padding:24px 28px!important;border-radius:30px!important}
+    .question-card .q{line-height:1.42!important}
+    .question-card .hint{line-height:1.9!important}
+
+    @media(max-width:760px){
+      .mood-grid{grid-template-columns:1fr!important}
+      .choice-card,.mood,.step{grid-template-columns:1fr!important}
+      .time-row{grid-template-columns:38px 1fr!important}
+      .time-dot{width:38px!important;height:38px!important}
+    }
+
+
+    /* v6 sentence-level language controls */
+    .lang-tools{display:none!important}
+    .sentence-tools{
+      display:inline-flex;
+      gap:6px;
+      margin-left:10px;
+      vertical-align:middle;
+      transform:translateY(-1px);
+    }
+    .sentence-btn{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.58);
+      color:var(--muted);
+      border-radius:999px;
+      padding:4px 8px;
+      font-size:11px;
+      line-height:1;
+      font-weight:850;
+      cursor:pointer;
+      transition:.2s ease;
+      letter-spacing:.01em;
+    }
+    .theme-night .sentence-btn{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16);color:rgba(255,246,232,.76)}
+    .sentence-btn:hover,
+    .sentence-btn.active{
+      background:var(--ink);
+      color:var(--bg);
+      border-color:transparent;
+    }
+    .theme-night .sentence-btn:hover,
+    .theme-night .sentence-btn.active{background:#fff;color:#101827}
+    .line-py-on{display:block!important}
+    .line-en-on{display:block!important}
+    .pyline.line-py-on,
+    .enline.line-en-on{
+      margin-top:8px;
+      padding-left:0;
+    }
+    .drawer .sentence-tools,
+    .large-answer .sentence-tools,
+    .dialogue-stream .sentence-tools,
+    .prompt-list .sentence-tools,
+    .study-grid .sentence-tools{
+      margin-left:8px;
+    }
+    .q .sentence-tools,
+    .hint .sentence-tools{
+      margin-left:10px;
+    }
+    @media(max-width:640px){
+      .sentence-tools{display:flex;margin:8px 0 0}
+      .sentence-btn{padding:5px 9px}
+    }
+
+
+    /* v7 dream section: richer, calmer, more spacious */
+    .dream-studio{
+      display:grid;
+      grid-template-columns:.92fr 1.08fr;
+      gap:42px;
+      align-items:center;
+    }
+    .dream-panel{
+      background:rgba(251,255,248,.72);
+      border:1px solid rgba(255,255,255,.66);
+      border-radius:44px;
+      padding:36px;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(26px);
+    }
+    .dream-title-row{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:18px;
+      margin-bottom:18px;
+    }
+    .dream-title-row h2{margin:0}
+    .dream-tag{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.5);
+      color:var(--muted);
+      border-radius:999px;
+      padding:9px 13px;
+      font-size:12px;
+      font-weight:850;
+      white-space:nowrap;
+    }
+    .dream-path{
+      display:grid;
+      gap:14px;
+      margin-top:20px;
+    }
+    .dream-row{
+      display:grid;
+      grid-template-columns:86px 1fr;
+      gap:18px;
+      align-items:start;
+      padding:20px 22px;
+      border-radius:28px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.48);
+      transition:.24s ease;
+    }
+    .dream-row:hover{
+      transform:translateY(-3px);
+      background:rgba(255,255,255,.68);
+      box-shadow:0 18px 50px rgba(42,67,51,.09);
+    }
+    .dream-row .label{
+      color:var(--accent);
+      font-weight:900;
+      letter-spacing:.05em;
+      font-size:13px;
+      padding-top:5px;
+    }
+    .dream-row .zh{
+      font-size:18px;
+      line-height:1.9;
+      color:var(--ink);
+    }
+    .dream-row .pyline,.dream-row .enline{
+      display:none;
+      font-size:13px;
+      line-height:1.7;
+      color:var(--muted);
+      margin-top:7px;
+    }
+    .dream-builder{
+      margin-top:22px;
+      border-radius:32px;
+      padding:26px;
+      background:linear-gradient(135deg,rgba(255,255,255,.72),rgba(226,239,222,.58));
+      border:1px solid var(--line);
+    }
+    .dream-builder h3{
+      font-family:var(--sans);
+      font-size:21px;
+      letter-spacing:-.03em;
+      margin:0 0 16px;
+    }
+    .dream-tabs{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:16px;
+    }
+    .dream-tab{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.58);
+      color:var(--muted);
+      padding:11px 15px;
+      border-radius:999px;
+      font-weight:850;
+      cursor:pointer;
+      transition:.22s ease;
+    }
+    .dream-tab.active{
+      background:var(--ink);
+      color:var(--bg);
+      border-color:transparent;
+    }
+    .dream-output{
+      border-radius:24px;
+      padding:20px 22px;
+      background:rgba(255,255,255,.56);
+      border:1px solid var(--line);
+    }
+    .dream-output .zh{
+      font-size:18px;
+      line-height:1.95;
+    }
+    .dream-output .pyline,.dream-output .enline{
+      display:none;
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.75;
+      margin-top:8px;
+    }
+    .dream-photo-stack{
+      display:grid;
+      gap:18px;
+    }
+    .dream-photo-main{
+      min-height:520px;
+    }
+    .dream-photo-strip{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+    .dream-mini-photo{
+      min-height:170px;
+      border-radius:28px;
+      overflow:hidden;
+      position:relative;
+      box-shadow:0 18px 48px rgba(43,68,53,.12);
+      background:var(--soft);
+    }
+    .dream-mini-photo img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center 58%;
+      transition:.6s ease;
+    }
+    .dream-mini-photo:hover img{transform:scale(1.06)}
+    .dream-mini-photo::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.44));
+    }
+    .dream-mini-photo span{
+      position:absolute;
+      left:18px;
+      right:18px;
+      bottom:16px;
+      z-index:2;
+      color:#fff;
+      font-weight:850;
+      line-height:1.35;
+      text-wrap:balance;
+    }
+    @media(max-width:980px){
+      .dream-studio{grid-template-columns:1fr}
+      .dream-photo-main{min-height:420px}
+    }
+    @media(max-width:640px){
+      .dream-panel{padding:24px;border-radius:32px}
+      .dream-title-row{display:block}
+      .dream-tag{display:inline-flex;margin-top:12px}
+      .dream-row{grid-template-columns:1fr;gap:8px}
+      .dream-photo-strip{grid-template-columns:1fr}
+    }
+
+
+    /* v8 robust target-bound language buttons */
+    .line-control-row{
+      display:flex;
+      gap:6px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .line-control-row.inline{
+      display:inline-flex;
+      margin-top:0;
+      margin-left:10px;
+      vertical-align:middle;
+    }
+    .line-control-row .sentence-btn{
+      pointer-events:auto;
+    }
+
+    .theme-story{--bg:#f6efe4;--paper:#fffaf2;--ink:#28231f;--muted:#7d746b;--soft:#e7d9c9;--accent:#b78952;--accent2:#7a9a9c}
+    .theme-friend{--bg:#f8f2e8;--paper:#fffaf3;--ink:#2a241f;--muted:#7b7064;--soft:#eadbc8;--accent:#ca8855;--accent2:#79a899}
+    .theme-love{--bg:#f8eeee;--paper:#fff8f7;--ink:#2d2224;--muted:#806b70;--soft:#ead4d6;--accent:#b66b79;--accent2:#9a745f}
+    .theme-dream{--bg:#eff6f1;--paper:#fbfff8;--ink:#1f2a27;--muted:#6c7b75;--soft:#d9e7db;--accent:#92aa72;--accent2:#d7a95c}
+    .theme-night{--bg:#101827;--paper:rgba(255,255,255,.08);--ink:#fff6e8;--muted:rgba(255,246,232,.66);--soft:#1b2738;--line:rgba(255,255,255,.14);--accent:#f0a86b;--accent2:#9f84ff}.theme-night .panel,.theme-night .question-card,.theme-night .time-card,.theme-night .ladder,.theme-night .choice-card,.theme-night .feedback,.theme-night .rubric div,.theme-night .chip-card,.theme-night .scene-output{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14);box-shadow:0 30px 90px rgba(0,0,0,.22)}.theme-night .topbar{background:rgba(18,25,38,.68);border-color:rgba(255,255,255,.12)}.theme-night .btn.ghost,.theme-night .mood,.theme-night .chip,.theme-night .diff-btn{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14)}
+    .theme-shop{--bg:#fbf3ea;--paper:#fffaf5;--ink:#30241e;--muted:#7f6f63;--soft:#ecdccb;--accent:#d7864d;--accent2:#c85f55}
+    .theme-phone{--bg:#eef3f7;--paper:#fbfdff;--ink:#1d2730;--muted:#66747f;--soft:#d8e3ec;--accent:#547b9a;--accent2:#9aa7b4}
+
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .72s ease, transform .72s ease}.reveal.in{opacity:1;transform:none}
+    .floaty{animation:floaty 5.5s ease-in-out infinite alternate}@keyframes floaty{to{transform:translateY(-10px)}}
+
+    @media(max-width:980px){.topbar{height:auto;min-height:58px;border-radius:28px;align-items:flex-start;padding:14px 16px;flex-direction:column}.nav{max-width:100%}section.slide{padding-top:150px}.hero,.split,.split.reverse,.stage{grid-template-columns:1fr}.hero-visual,.image-card{min-height:460px}.mood-grid,.phone-flow{grid-template-columns:1fr 1fr}.ladder-steps{grid-template-columns:1fr}.topic-map{grid-template-columns:repeat(7,230px)}.opinion-scale,.rubric,.feedback-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:640px){section.slide{padding-left:18px;padding-right:18px}.mood-grid,.cards-2,.phone-flow,.opinion-scale,.rubric,.feedback-grid{grid-template-columns:1fr}.panel{padding:22px;border-radius:30px}.image-card{min-height:360px}.timer-ring{width:210px;height:210px}.topic-tile{min-height:225px}}
+  </style>
+</head>
+<body class="theme-story">
+  <div class="progress" id="progress"></div>
+  <header class="topbar">
+    <a href="#cover" class="brand"><span class="brand-dot"></span><span>Speaking Lounge</span></a>
+    <nav class="nav" id="nav">
+      <a href="#cover">首页</a><a href="#lesson1">Lesson 1</a><a href="#story">汉语故事</a><a href="#friend">朋友</a><a href="#love">爱情</a><a href="#dream">梦想</a><a href="#lesson2">Lesson 2</a><a href="#night">夜生活</a><a href="#shop">网购</a><a href="#phone">没有手机</a><a href="#stage">Final Talk</a>
+    </nav>
+  </header>
+
+  <main>
+        <section id="cover" class="slide theme-story" data-theme="theme-story">
+      <div class="slide-inner hero compact-hero">
+        <div class="reveal">
+          <div class="cover-kicker">Speaking Lounge · HSK3–4</div>
+          <h1>轻松聊中文</h1>
+          <div class="cover-note">从一个词开始，慢慢说成一句话，再慢慢说成一小段。</div>
+          <div class="cta-row"><a class="btn" href="#map">选话题</a><a class="btn ghost" href="#lesson1">Lesson 1</a><a class="btn ghost" href="#lesson2">Lesson 2</a></div>
+        </div>
+        <div class="hero-visual reveal floaty">
+          <img src="https://images.unsplash.com/photo-1516534775068-ba3e7458af70?auto=format&fit=crop&w=1400&q=86" alt="online speaking lesson" onerror="this.style.display='none'">
+        </div>
+      </div>
+    </section>
+
+        <section id="map" class="slide theme-story map-clean" data-theme="theme-story">
+      <div class="slide-inner reveal">
+        <div class="topic-map">
+          <a class="topic-tile" href="#story" style="--img:url('https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=900&q=80')"><span class="topic-num">01</span><div><h3>我和汉语的故事</h3><div class="pinyin">wǒ hé hànyǔ de gùshi</div><div class="en">My Chinese story</div></div></a>
+          <a class="topic-tile" href="#night" style="--img:url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=900&q=80')"><span class="topic-num">02</span><div><h3>我们的夜生活</h3><div class="pinyin">wǒmen de yè shēnghuó</div><div class="en">Our nightlife</div></div></a>
+          <a class="topic-tile" href="#love" style="--img:url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=900&q=80')"><span class="topic-num">03</span><div><h3>有这样的爱情</h3><div class="pinyin">yǒu zhèyàng de àiqíng</div><div class="en">This kind of love</div></div></a>
+          <a class="topic-tile" href="#shop" style="--img:url('https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=900&q=80')"><span class="topic-num">04</span><div><h3>网购的快乐与烦恼</h3><div class="pinyin">wǎnggòu de kuàilè yǔ fánnǎo</div><div class="en">Online shopping</div></div></a>
+          <a class="topic-tile" href="#phone" style="--img:url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=900&q=80')"><span class="topic-num">05</span><div><h3>如果没有手机</h3><div class="pinyin">rúguǒ méiyǒu shǒujī</div><div class="en">Without a phone</div></div></a>
+          <a class="topic-tile" href="#dream" style="--img:url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80')"><span class="topic-num">06</span><div><h3>我的梦想</h3><div class="pinyin">wǒ de mèngxiǎng</div><div class="en">My dream</div></div></a>
+          <a class="topic-tile" href="#friend" style="--img:url('https://images.unsplash.com/photo-1511988617509-a57c8a288659?auto=format&fit=crop&w=900&q=80')"><span class="topic-num">07</span><div><h3>我的好兄弟 / 姐妹</h3><div class="pinyin">wǒ de hǎo xiōngdì / jiěmèi</div><div class="en">My close friend</div></div></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="lesson1" class="slide theme-story" data-theme="theme-story">
+      <div class="slide-inner split">
+        <div class="image-card reveal"><img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1200&q=86" alt="warm study desk"><div class="caption"><b>Lesson 1</b><span>慢慢讲你的故事。</span></div></div>
+        <div class="panel reveal">
+          <div class="eyebrow">Mood Check · 3 min</div>
+          <h2>今天你的中文能量是多少？</h2>
+          <p class="sub">先选择状态，再开始说。这个步骤让学生不用立刻进入“被考”的状态。</p>
+          <div class="mood-grid" data-mood-group>
+            <button class="mood" data-response="没关系。今天可以先说一个词，再说一句话，最后再说一小段。"><strong>有点紧张</strong><span>nervous</span></button>
+            <button class="mood" data-response="很好。我们会慢一点，每次只做一个小任务。"><strong>可以慢慢说</strong><span>slow mode</span></button>
+            <button class="mood" data-response="太好了。你可以先选 Better，如果顺利再试 Challenge。"><strong>想挑战一下</strong><span>challenge</span></button>
+            <button class="mood" data-response="可以。我们先从选择题和关键词开始，不需要马上说长句。"><strong>还没准备好</strong><span>not ready</span></button>
+            <button class="mood" data-response="状态很好。今天可以练更自然的连接词和例子。"><strong>状态不错</strong><span>good energy</span></button>
+          </div>
+          <div class="response"></div>
+        </div>
+      </div>
+    </section>
+
+        <section id="story" class="slide theme-story" data-theme="theme-story">
+      <div class="slide-inner split reverse">
+        <div class="panel reveal">
+          <div class="minimal-head"><h2>我和汉语的故事</h2></div>
+          <div class="lang-tools">
+            <button class="lang-toggle" data-lang="py">拼音</button>
+            <button class="lang-toggle" data-lang="en">English</button>
+          </div>
+          <div class="difficulty" data-difficulty>
+            <button class="diff-btn active" data-level="easy">Easy</button><button class="diff-btn" data-level="better">Better</button><button class="diff-btn" data-level="challenge">Challenge</button>
+          </div>
+          <div class="question-card" data-questions='{"easy":{"q":"你为什么学中文？","py":"Nǐ wèishénme xué zhōngwén?","en":"Why do you study Chinese?","hint":"我学中文是因为……","hintPy":"Wǒ xué zhōngwén shì yīnwèi...","hintEn":"I study Chinese because..."},"better":{"q":"你是什么时候开始学中文的？为什么？","py":"Nǐ shì shénme shíhou kāishǐ xué zhōngwén de? Wèishénme?","en":"When did you start learning Chinese, and why?","hint":"我从……开始学中文，因为……","hintPy":"Wǒ cóng ... kāishǐ xué zhōngwén, yīnwèi...","hintEn":"I started learning Chinese in/from..., because..."},"challenge":{"q":"学中文以后，你的生活有什么变化？","py":"Xué zhōngwén yǐhòu, nǐ de shēnghuó yǒu shénme biànhuà?","en":"What changes has Chinese brought to your life?","hint":"学中文以后，我发现……，也让我……","hintPy":"Xué zhōngwén yǐhòu, wǒ fāxiàn..., yě ràng wǒ...","hintEn":"After learning Chinese, I found that..., and it also made me..."}}'>
+            <div class="q zh"></div>
+            <div class="pyline q-py"></div>
+            <div class="enline q-en"></div>
+            <div class="hint zh" style="margin-top:16px"></div>
+            <div class="pyline hint-py"></div>
+            <div class="enline hint-en"></div>
+          </div>
+          <button class="reveal-btn">Help Me Say It</button>
+          <div class="drawer">
+            <div class="study-stack">
+              <div class="study-unit"><div class="zh">我开始学汉语是因为……</div><div class="pyline">Wǒ kāishǐ xué hànyǔ shì yīnwèi...</div><div class="enline">I started learning Chinese because...</div></div>
+              <div class="study-unit"><div class="zh">一开始，我觉得……</div><div class="pyline">Yī kāishǐ, wǒ juéde...</div><div class="enline">At first, I felt / thought...</div></div>
+              <div class="study-unit"><div class="zh">后来，我发现……</div><div class="pyline">Hòulái, wǒ fāxiàn...</div><div class="enline">Later, I found that...</div></div>
+              <div class="study-unit"><div class="zh">对我来说，最难的是……</div><div class="pyline">Duì wǒ láishuō, zuì nán de shì...</div><div class="enline">For me, the hardest part is...</div></div>
+              <div class="study-unit"><div class="zh">以后，我希望……</div><div class="pyline">Yǐhòu, wǒ xīwàng...</div><div class="enline">In the future, I hope to...</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="image-card reveal"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=86" alt="learning Chinese online"><div class="caption"><b>One real story is enough.</b><span>先讲一件真实的小事。</span></div></div>
+      </div>
+    </section>
+
+        <section id="friend" class="slide theme-friend" data-theme="theme-friend">
+      <div class="slide-inner split">
+        <div class="image-card reveal"><img src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?auto=format&fit=crop&w=1200&q=86" alt="friends talking"><div class="caption"><b>Friend Profile</b><span>从一个真实的人开始。</span></div></div>
+        <div class="panel reveal">
+          <div class="minimal-head"><h2>我的好兄弟 / 姐妹</h2></div>
+          <div class="lang-tools">
+            <button class="lang-toggle" data-lang="py">拼音</button>
+            <button class="lang-toggle" data-lang="en">English</button>
+          </div>
+          <div class="cards-2">
+            <div class="choice-card active"><strong>他 / 她是什么样的人？</strong><span>开朗、幽默、可靠、热心、安静、认真……</span></div>
+            <div class="choice-card"><strong>你们为什么关系好？</strong><span>认识很久、聊得来、互相支持、一起经历过很多事。</span></div>
+          </div>
+          <div class="chips" data-chipbox>
+            <button class="chip" data-title="可靠" data-pinyin="kěkào" data-en="reliable" data-sample-zh="他是一个很可靠的朋友。" data-sample-py="Tā shì yí ge hěn kěkào de péngyou." data-sample-en="He is a very reliable friend.">可靠</button>
+            <button class="chip" data-title="聊得来" data-pinyin="liáo de lái" data-en="easy to talk to" data-sample-zh="我们很聊得来，所以关系一直很好。" data-sample-py="Wǒmen hěn liáo de lái, suǒyǐ guānxi yìzhí hěn hǎo." data-sample-en="We get along and talk easily, so our relationship has always been good.">聊得来</button>
+            <button class="chip" data-title="互相支持" data-pinyin="hùxiāng zhīchí" data-en="support each other" data-sample-zh="真正的朋友应该互相支持。" data-sample-py="Zhēnzhèng de péngyou yīnggāi hùxiāng zhīchí." data-sample-en="Real friends should support each other.">互相支持</button>
+            <button class="chip" data-title="一起长大" data-pinyin="yìqǐ zhǎngdà" data-en="grow up together" data-sample-zh="我们从小一起长大，像家人一样。" data-sample-py="Wǒmen cóngxiǎo yìqǐ zhǎngdà, xiàng jiārén yíyàng." data-sample-en="We grew up together like family.">一起长大</button>
+          </div>
+          <div class="chip-card"></div>
+          <div class="study-grid">
+            <div class="study-card"><b>一句话</b><div class="zh">他是一个很可靠的人。</div><div class="pyline">Tā shì yí ge hěn kěkào de rén.</div><div class="enline">He is a very reliable person.</div></div>
+            <div class="study-card"><b>一个原因</b><div class="zh">因为我有困难的时候，他会帮我。</div><div class="pyline">Yīnwèi wǒ yǒu kùnnan de shíhou, tā huì bāng wǒ.</div><div class="enline">Because when I have difficulties, he helps me.</div></div>
+            <div class="study-card"><b>一个例子</b><div class="zh">比如，有一次我很难过，他听我说了很久。</div><div class="pyline">Bǐrú, yǒu yí cì wǒ hěn nánguò, tā tīng wǒ shuō le hěn jiǔ.</div><div class="enline">For example, once I was very upset, and he listened to me for a long time.</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+        <section id="love" class="slide theme-love" data-theme="theme-love">
+      <div class="slide-inner split reverse">
+        <div class="panel reveal">
+          <div class="minimal-head"><h2>有这样的爱情</h2></div>
+          <div class="lang-tools">
+            <button class="lang-toggle" data-lang="py">拼音</button>
+            <button class="lang-toggle" data-lang="en">English</button>
+          </div>
+          <div class="question-card"><div class="q zh">爱情里，什么最重要？</div><div class="pyline">Àiqíng lǐ, shénme zuì zhòngyào?</div><div class="enline">What is the most important thing in love?</div><div class="hint zh">信任 / 尊重 / 沟通 / 钱 / 共同目标 / 性格合适</div></div>
+          <div class="opinion-scale" data-opinion>
+            <button class="scale-btn" data-text-zh="我同意这个观点。因为两个人在一起的时候，信任很重要。如果没有信任，关系会很累。" data-text-py="Wǒ tóngyì zhège guāndiǎn. Yīnwèi liǎng ge rén zài yìqǐ de shíhou, xìnrèn hěn zhòngyào. Rúguǒ méiyǒu xìnrèn, guānxi huì hěn lèi." data-text-en="I agree with this view. When two people are together, trust is very important. Without trust, the relationship becomes tiring.">我同意</button>
+            <button class="scale-btn" data-text-zh="我不完全同意。信任很重要，但是沟通也很重要。两个人需要把自己的想法说出来。" data-text-py="Wǒ bù wánquán tóngyì. Xìnrèn hěn zhòngyào, dànshì gōutōng yě hěn zhòngyào. Liǎng ge rén xūyào bǎ zìjǐ de xiǎngfa shuō chūlái." data-text-en="I don't completely agree. Trust is important, but communication is also important. Two people need to express what they think.">不完全同意</button>
+            <button class="scale-btn" data-text-zh="我不同意。每个人的爱情不一样，所以不能只说一个标准。对我来说，尊重更重要。" data-text-py="Wǒ bù tóngyì. Měi ge rén de àiqíng bù yíyàng, suǒyǐ bùnéng zhǐ shuō yí ge biāozhǔn. Duì wǒ láishuō, zūnzhòng gèng zhòngyào." data-text-en="I disagree. Everyone's love is different, so there isn't only one standard. For me, respect is more important.">我不同意</button>
+            <button class="scale-btn" data-text-zh="这要看情况。如果两个人很年轻，可能梦想更重要；如果要结婚，现实问题也很重要。" data-text-py="Zhè yào kàn qíngkuàng. Rúguǒ liǎng ge rén hěn niánqīng, kěnéng mèngxiǎng gèng zhòngyào; rúguǒ yào jiéhūn, xiànshí wèntí yě hěn zhòngyào." data-text-en="It depends. If two people are very young, dreams may matter more; if they want to get married, practical issues are also important.">看情况</button>
+          </div>
+          <div class="opinion-output"></div>
+          <button class="reveal-btn">表达框架</button>
+          <div class="drawer"><div class="study-stack"><div class="study-unit"><div class="zh">我觉得……最重要。</div><div class="pyline">Wǒ juéde ... zuì zhòngyào.</div><div class="enline">I think ... is the most important.</div></div><div class="study-unit"><div class="zh">因为……</div><div class="pyline">Yīnwèi...</div><div class="enline">Because...</div></div><div class="study-unit"><div class="zh">比如……</div><div class="pyline">Bǐrú...</div><div class="enline">For example...</div></div><div class="study-unit"><div class="zh">所以我认为……</div><div class="pyline">Suǒyǐ wǒ rènwéi...</div><div class="enline">So I think...</div></div></div></div>
+        </div>
+        <div class="image-card reveal"><img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=1200&q=86" alt="warm relationship scene"><div class="caption"><b>Quiet and real.</b><span>只要说出自己的看法。</span></div></div>
+      </div>
+    </section>
+
+    <section id="dream" class="slide theme-dream" data-theme="theme-dream">
+      <div class="slide-inner dream-studio">
+        <div class="dream-photo-stack reveal">
+          <div class="image-card dream-photo-main">
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=86" alt="bright road and future">
+            <div class="caption"><b>我的梦想</b><span>安静地说出未来。</span></div>
+          </div>
+          <div class="dream-photo-strip">
+            <div class="dream-mini-photo"><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=86" alt="workspace"><span>现在想做的事</span></div>
+            <div class="dream-mini-photo"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=86" alt="online learning"><span>需要慢慢准备</span></div>
+          </div>
+        </div>
+
+        <div class="dream-panel reveal">
+          <div class="dream-title-row">
+            <h2>我的梦想</h2>
+            <div class="dream-tag">slow speaking · no pressure</div>
+          </div>
+
+          <div class="dream-path">
+            <div class="dream-row">
+              <div class="label">以前</div>
+              <div>
+                <div class="zh">我小时候想当……，因为那时候我觉得……</div>
+                <div class="pyline">Wǒ xiǎoshíhou xiǎng dāng..., yīnwèi nà shíhou wǒ juéde...</div>
+                <div class="enline">When I was little, I wanted to be..., because at that time I thought...</div>
+              </div>
+            </div>
+            <div class="dream-row">
+              <div class="label">现在</div>
+              <div>
+                <div class="zh">现在我的梦想变了，我更想……</div>
+                <div class="pyline">Xiànzài wǒ de mèngxiǎng biàn le, wǒ gèng xiǎng...</div>
+                <div class="enline">Now my dream has changed. I want to... more.</div>
+              </div>
+            </div>
+            <div class="dream-row">
+              <div class="label">原因</div>
+              <div>
+                <div class="zh">这个梦想对我很重要，因为它让我觉得生活更有方向。</div>
+                <div class="pyline">Zhège mèngxiǎng duì wǒ hěn zhòngyào, yīnwèi tā ràng wǒ juéde shēnghuó gèng yǒu fāngxiàng.</div>
+                <div class="enline">This dream is very important to me because it makes me feel that life has more direction.</div>
+              </div>
+            </div>
+            <div class="dream-row">
+              <div class="label">困难</div>
+              <div>
+                <div class="zh">最大的困难可能是时间不够，压力也会比较大。</div>
+                <div class="pyline">Zuì dà de kùnnan kěnéng shì shíjiān bú gòu, yālì yě huì bǐjiào dà.</div>
+                <div class="enline">The biggest difficulty may be not having enough time, and the pressure may also be quite high.</div>
+              </div>
+            </div>
+            <div class="dream-row">
+              <div class="label">计划</div>
+              <div>
+                <div class="zh">为了实现这个梦想，我需要先……，然后……</div>
+                <div class="pyline">Wèile shíxiàn zhège mèngxiǎng, wǒ xūyào xiān..., ránhòu...</div>
+                <div class="enline">To achieve this dream, I need to first..., and then...</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dream-builder" data-dream-builder>
+            <h3>从短句到一小段</h3>
+            <div class="dream-tabs">
+              <button class="dream-tab active"
+                data-zh="我的梦想是以后可以做一份自己喜欢的工作。这个梦想对我很重要，因为我希望生活更自由，也希望每天都能学习新的东西。为了实现它，我需要提高自己的能力，也需要更认真地计划时间。"
+                data-py="Wǒ de mèngxiǎng shì yǐhòu kěyǐ zuò yí fèn zìjǐ xǐhuan de gōngzuò. Zhège mèngxiǎng duì wǒ hěn zhòngyào, yīnwèi wǒ xīwàng shēnghuó gèng zìyóu, yě xīwàng měitiān dōu néng xuéxí xīn de dōngxi. Wèile shíxiàn tā, wǒ xūyào tígāo zìjǐ de nénglì, yě xūyào gèng rènzhēn de jìhuà shíjiān."
+                data-en="My dream is to have a job I really like in the future. This dream is important to me because I hope life can be freer, and I hope I can learn something new every day. To achieve it, I need to improve my abilities and plan my time more carefully.">工作</button>
+              <button class="dream-tab"
+                data-zh="我的梦想是去更多地方看看。旅行对我来说不只是玩，也是一种学习。以后我希望可以用中文旅行，和当地人聊天，了解不同的生活方式。"
+                data-py="Wǒ de mèngxiǎng shì qù gèng duō dìfang kànkan. Lǚxíng duì wǒ láishuō bù zhǐ shì wán, yě shì yì zhǒng xuéxí. Yǐhòu wǒ xīwàng kěyǐ yòng zhōngwén lǚxíng, hé dāngdì rén liáotiān, liǎojiě bùtóng de shēnghuó fāngshì."
+                data-en="My dream is to see more places. For me, traveling is not only for fun; it is also a kind of learning. In the future, I hope I can travel using Chinese, talk with local people, and understand different ways of life.">旅行</button>
+              <button class="dream-tab"
+                data-zh="我的梦想是让自己变得更勇敢。以前我说外语的时候很紧张，但是我希望以后可以更自然地表达自己。这个梦想不大，但是对我来说很真实。"
+                data-py="Wǒ de mèngxiǎng shì ràng zìjǐ biàn de gèng yǒnggǎn. Yǐqián wǒ shuō wàiyǔ de shíhou hěn jǐnzhāng, dànshì wǒ xīwàng yǐhòu kěyǐ gèng zìrán de biǎodá zìjǐ. Zhège mèngxiǎng bù dà, dànshì duì wǒ láishuō hěn zhēnshí."
+                data-en="My dream is to become braver. In the past, I felt nervous when speaking a foreign language, but I hope that in the future I can express myself more naturally. This dream is not big, but it is very real to me.">成长</button>
+            </div>
+            <div class="dream-output">
+              <div class="zh">我的梦想是以后可以做一份自己喜欢的工作。这个梦想对我很重要，因为我希望生活更自由，也希望每天都能学习新的东西。为了实现它，我需要提高自己的能力，也需要更认真地计划时间。</div>
+              <div class="pyline">Wǒ de mèngxiǎng shì yǐhòu kěyǐ zuò yí fèn zìjǐ xǐhuan de gōngzuò. Zhège mèngxiǎng duì wǒ hěn zhòngyào, yīnwèi wǒ xīwàng shēnghuó gèng zìyóu, yě xīwàng měitiān dōu néng xuéxí xīn de dōngxi. Wèile shíxiàn tā, wǒ xūyào tígāo zìjǐ de nénglì, yě xūyào gèng rènzhēn de jìhuà shíjiān.</div>
+              <div class="enline">My dream is to have a job I really like in the future. This dream is important to me because I hope life can be freer, and I hope I can learn something new every day. To achieve it, I need to improve my abilities and plan my time more carefully.</div>
+            </div>
+          </div>
+
+          <div class="prompt-list">
+            <div class="prompt-line">
+              <div class="dot">1</div>
+              <div>
+                <div class="zh">你小时候的梦想和现在一样吗？</div>
+                <div class="pyline">Nǐ xiǎoshíhou de mèngxiǎng hé xiànzài yíyàng ma?</div>
+                <div class="enline">Is your childhood dream the same as your dream now?</div>
+              </div>
+            </div>
+            <div class="prompt-line">
+              <div class="dot">2</div>
+              <div>
+                <div class="zh">为了实现这个梦想，你现在可以做一件什么小事？</div>
+                <div class="pyline">Wèile shíxiàn zhège mèngxiǎng, nǐ xiànzài kěyǐ zuò yí jiàn shénme xiǎoshì?</div>
+                <div class="enline">To achieve this dream, what is one small thing you can do now?</div>
+              </div>
+            </div>
+            <div class="prompt-line">
+              <div class="dot">3</div>
+              <div>
+                <div class="zh">如果失败了，你会怎么办？</div>
+                <div class="pyline">Rúguǒ shībài le, nǐ huì zěnme bàn?</div>
+                <div class="enline">If you fail, what will you do?</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="lesson2" class="slide theme-night" data-theme="theme-night">
+      <div class="slide-inner lesson2-gate reveal">
+        <div class="gate-copy">
+          <div class="cover-kicker">Lesson 2 · Modern Life</div>
+          <h1>城市夜晚，手机和购物车。</h1>
+          <div class="cover-note">这一节不急着说长答案。先进入场景，再选择立场，最后慢慢说出理由和例子。</div>
+        </div>
+        <div class="cinema-row">
+          <a class="cinema-card" href="#night" style="--poster:url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=900&q=86')">
+            <span class="num">01</span>
+            <div><h3>我们的夜生活</h3><p>wǒmen de yè shēnghuó · Our nightlife</p></div>
+          </a>
+          <a class="cinema-card" href="#shop" style="--poster:url('https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=900&q=86')">
+            <span class="num">02</span>
+            <div><h3>网购的快乐与烦恼</h3><p>wǎnggòu de kuàilè yǔ fánnǎo · Online shopping</p></div>
+          </a>
+          <a class="cinema-card" href="#phone" style="--poster:url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=900&q=86')">
+            <span class="num">03</span>
+            <div><h3>如果没有手机</h3><p>rúguǒ méiyǒu shǒujī · Without a phone</p></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="night" class="slide theme-night" data-theme="theme-night">
+      <div class="slide-inner big-topic">
+        <div class="image-card reveal">
+          <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=86" alt="night life">
+          <div class="caption"><b>夜生活不一定热闹。</b><span>它也可以是放松、安静、散步、聊天。</span></div>
+        </div>
+        <div class="wide-panel reveal">
+          <div class="minimal-head"><h2>我们的夜生活</h2></div>
+          <div class="lang-tools">
+            <button class="lang-toggle" data-lang="py">拼音</button>
+            <button class="lang-toggle" data-lang="en">English</button>
+          </div>
+
+          <div class="focus-question zh">你晚上的生活，更像哪一种？</div>
+          <div class="pyline">Nǐ wǎnshàng de shēnghuó, gèng xiàng nǎ yì zhǒng?</div>
+          <div class="enline">Which type is your evening life more like?</div>
+
+          <div class="segment-tabs" data-segment>
+            <button class="segment-tab active"
+              data-zh="我的夜生活比较简单。下课或者下班以后，我一般在家休息，有时候看视频，有时候学习中文。周末我可能会和朋友出去吃饭，但是我不太喜欢太吵的地方。"
+              data-py="Wǒ de yè shēnghuó bǐjiào jiǎndān. Xiàkè huòzhě xiàbān yǐhòu, wǒ yìbān zài jiā xiūxi, yǒu shíhou kàn shìpín, yǒu shíhou xué zhōngwén. Zhōumò wǒ kěnéng huì hé péngyou chūqù chīfàn, dànshì wǒ bù tài xǐhuan tài chǎo de dìfang."
+              data-en="My nightlife is quite simple. After class or work, I usually rest at home. Sometimes I watch videos, and sometimes I study Chinese. On weekends I may go out for dinner with friends, but I don't really like places that are too noisy.">在家休息型</button>
+            <button class="segment-tab"
+              data-zh="我喜欢有一点热闹的夜生活。周末晚上，我会和朋友去餐厅、咖啡馆，或者在城市里散步。对我来说，夜生活最重要的不是很晚睡，而是可以放松。"
+              data-py="Wǒ xǐhuan yǒu yìdiǎn rènào de yè shēnghuó. Zhōumò wǎnshàng, wǒ huì hé péngyou qù cāntīng, kāfēiguǎn, huòzhě zài chéngshì lǐ sànbù. Duì wǒ láishuō, yè shēnghuó zuì zhòngyào de bú shì hěn wǎn shuì, ér shì kěyǐ fàngsōng."
+              data-en="I like nightlife that is a little lively. On weekend evenings, I go to restaurants or cafés with friends, or walk around the city. For me, nightlife is not about sleeping very late; it is about relaxing.">朋友聚会型</button>
+            <button class="segment-tab"
+              data-zh="我晚上的时间常常留给学习或者工作。虽然有时候会觉得累，但是晚上比较安静，我可以更专心。对我来说，好的夜生活不一定要出去玩，也可以是完成自己的计划。"
+              data-py="Wǒ wǎnshàng de shíjiān chángcháng liú gěi xuéxí huòzhě gōngzuò. Suīrán yǒu shíhou huì juéde lèi, dànshì wǎnshàng bǐjiào ānjìng, wǒ kěyǐ gèng zhuānxīn. Duì wǒ láishuō, hǎo de yè shēnghuó bù yídìng yào chūqù wán, yě kěyǐ shì wánchéng zìjǐ de jìhuà."
+              data-en="I often use my evenings for studying or work. Although it can be tiring, the evening is quieter, so I can focus better. For me, good nightlife doesn't have to mean going out; it can also mean finishing my own plans.">学习工作型</button>
+          </div>
+
+          <div class="large-answer segment-output">
+            <div class="zh">我的夜生活比较简单。下课或者下班以后，我一般在家休息，有时候看视频，有时候学习中文。周末我可能会和朋友出去吃饭，但是我不太喜欢太吵的地方。</div>
+            <div class="pyline">Wǒ de yè shēnghuó bǐjiào jiǎndān. Xiàkè huòzhě xiàbān yǐhòu, wǒ yìbān zài jiā xiūxi, yǒu shíhou kàn shìpín, yǒu shíhou xué zhōngwén. Zhōumò wǒ kěnéng huì hé péngyou chūqù chīfàn, dànshì wǒ bù tài xǐhuan tài chǎo de dìfang.</div>
+            <div class="enline">My nightlife is quite simple. After class or work, I usually rest at home. Sometimes I watch videos, and sometimes I study Chinese. On weekends I may go out for dinner with friends, but I don't really like places that are too noisy.</div>
+          </div>
+
+          <div class="prompt-list">
+            <div class="prompt-line"><div class="dot">1</div><div><div class="zh">你喜欢安静的夜晚，还是热闹的夜晚？为什么？</div><div class="pyline">Nǐ xǐhuan ānjìng de yèwǎn, háishi rènào de yèwǎn? Wèishénme?</div><div class="enline">Do you prefer quiet nights or lively nights? Why?</div></div></div>
+            <div class="prompt-line"><div class="dot">2</div><div><div class="zh">你的城市晚上有什么好玩的地方？</div><div class="pyline">Nǐ de chéngshì wǎnshàng yǒu shénme hǎowán de dìfang?</div><div class="enline">What fun places are there at night in your city?</div></div></div>
+            <div class="prompt-line"><div class="dot">3</div><div><div class="zh">夜生活丰富，是好事还是坏事？这要看什么情况？</div><div class="pyline">Yè shēnghuó fēngfù, shì hǎoshì háishi huàishì? Zhè yào kàn shénme qíngkuàng?</div><div class="enline">Is rich nightlife a good thing or a bad thing? What does it depend on?</div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+        <section id="shop" class="slide theme-shop" data-theme="theme-shop">
+      <div class="slide-inner big-topic reverse">
+        <div class="wide-panel reveal">
+          <div class="minimal-head"><h2>网购的快乐与烦恼</h2></div>
+          <div class="lang-tools">
+            <button class="lang-toggle" data-lang="py">拼音</button>
+            <button class="lang-toggle" data-lang="en">English</button>
+          </div>
+
+          <div class="focus-question zh">你最近一次网购，买了什么？满意吗？</div>
+          <div class="pyline">Nǐ zuìjìn yí cì wǎnggòu, mǎi le shénme? Mǎnyì ma?</div>
+          <div class="enline">What did you buy online most recently? Were you satisfied?</div>
+
+          <div class="two-column-text">
+            <div class="soft-block">
+              <h3>快乐</h3>
+              <ul>
+                <li>不用出门，节省时间</li>
+                <li>选择很多，价格可能更便宜</li>
+                <li>可以看评价和买家照片</li>
+                <li>很容易买到国外或小众商品</li>
+              </ul>
+            </div>
+            <div class="soft-block">
+              <h3>烦恼</h3>
+              <ul>
+                <li>图片和实物不一样</li>
+                <li>质量不一定好</li>
+                <li>退货和等快递很麻烦</li>
+                <li>容易冲动消费，买太多</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="dialogue-stream">
+            <div class="bubble-line"><div class="zh">你经常网购吗？</div><div class="pyline">Nǐ jīngcháng wǎnggòu ma?</div><div class="enline">Do you often shop online?</div></div>
+            <div class="bubble-line"><div class="zh">我有时候网购，主要买衣服、书和生活用品。</div><div class="pyline">Wǒ yǒu shíhou wǎnggòu, zhǔyào mǎi yīfu, shū hé shēnghuó yòngpǐn.</div><div class="enline">I sometimes shop online, mainly for clothes, books, and daily necessities.</div></div>
+            <div class="bubble-line"><div class="zh">你有没有买到过不满意的东西？</div><div class="pyline">Nǐ yǒu méiyǒu mǎi dào guò bù mǎnyì de dōngxi?</div><div class="enline">Have you ever bought something you were not satisfied with?</div></div>
+            <div class="bubble-line"><div class="zh">有。有一次图片很好看，但是收到以后质量很差。后来我就会先看评价。</div><div class="pyline">Yǒu. Yǒu yí cì túpiàn hěn hǎokàn, dànshì shōu dào yǐhòu zhìliàng hěn chà. Hòulái wǒ jiù huì xiān kàn píngjià.</div><div class="enline">Yes. Once the picture looked great, but the quality was poor when I received it. After that, I started checking reviews first.</div></div>
+          </div>
+
+          <button class="reveal-btn">说一小段</button>
+          <div class="drawer">
+            <div class="large-answer">
+              <div class="zh">我觉得网购有快乐，也有烦恼。最大的快乐是方便，因为不用出门就可以买很多东西。但是网购也有问题，比如质量不好、退货麻烦，或者容易买太多。所以我觉得网购很好，但是买以前要认真看评价，不要冲动消费。</div>
+              <div class="pyline">Wǒ juéde wǎnggòu yǒu kuàilè, yě yǒu fánnǎo. Zuì dà de kuàilè shì fāngbiàn, yīnwèi bú yòng chūmén jiù kěyǐ mǎi hěn duō dōngxi. Dànshì wǎnggòu yě yǒu wèntí, bǐrú zhìliàng bù hǎo, tuìhuò máfan, huòzhě róngyì mǎi tài duō. Suǒyǐ wǒ juéde wǎnggòu hěn hǎo, dànshì mǎi yǐqián yào rènzhēn kàn píngjià, bú yào chōngdòng xiāofèi.</div>
+              <div class="enline">I think online shopping brings both happiness and trouble. The biggest happiness is convenience, because we can buy many things without going out. But online shopping also has problems, such as poor quality, troublesome returns, or buying too much easily. So I think online shopping is good, but we should check reviews carefully before buying and avoid impulse buying.</div>
+            </div>
+          </div>
+        </div>
+        <div class="image-card reveal">
+          <img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=86" alt="online shopping">
+          <div class="caption"><b>先说一次经历。</b><span>一次真实网购，比空泛优缺点更自然。</span></div>
+        </div>
+      </div>
+    </section>
+
+        <section id="phone" class="slide theme-phone" data-theme="theme-phone">
+      <div class="slide-inner reveal">
+        <div class="minimal-head"><h2>如果没有手机</h2></div>
+        <div class="lang-tools">
+          <button class="lang-toggle" data-lang="py">拼音</button>
+          <button class="lang-toggle" data-lang="en">English</button>
+        </div>
+
+        <div class="focus-question zh">如果一天没有手机，你最不习惯的是什么？</div>
+        <div class="pyline">Rúguǒ yì tiān méiyǒu shǒujī, nǐ zuì bù xíguàn de shì shénme?</div>
+        <div class="enline">If you had no phone for one day, what would you be most uncomfortable with?</div>
+
+        <div class="scene-band" data-scenes>
+          <div class="phone-scene" data-answer-zh="没有闹钟，我可能会睡过头。也许我需要用普通闹钟。" data-answer-py="Méiyǒu nàozhōng, wǒ kěnéng huì shuì guòtóu. Yěxǔ wǒ xūyào yòng pǔtōng nàozhōng." data-answer-en="Without an alarm, I might oversleep. Maybe I would need a regular alarm clock." style="--scene:url('https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=80')"><b>早上 · 没有闹钟</b></div>
+          <div class="phone-scene" data-answer-zh="没有地图，出门会比较麻烦。我可能需要提前查路线，或者问路。" data-answer-py="Méiyǒu dìtú, chūmén huì bǐjiào máfan. Wǒ kěnéng xūyào tíqián chá lùxiàn, huòzhě wèn lù." data-answer-en="Without maps, going out would be more troublesome. I might need to check the route in advance or ask for directions." style="--scene:url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=900&q=80')"><b>出门 · 没有地图</b></div>
+          <div class="phone-scene" data-answer-zh="不能手机支付会不方便，但是也可能让我少买东西。" data-answer-py="Bùnéng shǒujī zhīfù huì bù fāngbiàn, dànshì yě kěnéng ràng wǒ shǎo mǎi dōngxi." data-answer-en="Not being able to pay by phone would be inconvenient, but it might also make me buy fewer things." style="--scene:url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=80')"><b>买东西 · 不能支付</b></div>
+          <div class="phone-scene" data-answer-zh="没有微信，我可能会更想面对面聊天，也可能会觉得有点孤单。" data-answer-py="Méiyǒu Wēixìn, wǒ kěnéng huì gèng xiǎng miànduìmiàn liáotiān, yě kěnéng huì juéde yǒudiǎn gūdān." data-answer-en="Without WeChat, I might want to chat face to face more, but I might also feel a little lonely." style="--scene:url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=900&q=80')"><b>朋友 · 不能联系</b></div>
+        </div>
+
+        <div class="scene-output expanded-output"></div>
+
+        <div class="big-topic" style="margin-top:36px">
+          <div class="wide-panel">
+            <h3 style="font-family:var(--sans);font-size:24px">观点展开</h3>
+            <div class="prompt-list">
+              <div class="prompt-line"><div class="dot">1</div><div><div class="zh">手机让生活更方便，比如可以联系朋友、查地图、付款和学习。</div><div class="pyline">Shǒujī ràng shēnghuó gèng fāngbiàn, bǐrú kěyǐ liánxì péngyou, chá dìtú, fùkuǎn hé xuéxí.</div><div class="enline">Phones make life more convenient, for example, we can contact friends, check maps, pay, and study.</div></div></div>
+              <div class="prompt-line"><div class="dot">2</div><div><div class="zh">但是，手机也会让人分心，浪费时间，甚至影响面对面的交流。</div><div class="pyline">Dànshì, shǒujī yě huì ràng rén fēnxīn, làngfèi shíjiān, shènzhì yǐngxiǎng miànduìmiàn de jiāoliú.</div><div class="enline">However, phones can also distract people, waste time, and even affect face-to-face communication.</div></div></div>
+              <div class="prompt-line"><div class="dot">3</div><div><div class="zh">所以我觉得手机很重要，但是我们不能太依赖它。</div><div class="pyline">Suǒyǐ wǒ juéde shǒujī hěn zhòngyào, dànshì wǒmen bùnéng tài yīlài tā.</div><div class="enline">So I think phones are important, but we should not rely on them too much.</div></div></div>
+            </div>
+          </div>
+          <div class="large-answer">
+            <div class="zh">如果没有手机，我觉得生活会很不方便。因为我每天都用手机联系朋友、查地图、买东西和学习中文。但是，没有手机也可能让人更轻松。我们可能会少看短视频，多看书，多运动，也会更多地和身边的人聊天。所以我觉得，手机很好用，但是最重要的是找到平衡。</div>
+            <div class="pyline">Rúguǒ méiyǒu shǒujī, wǒ juéde shēnghuó huì hěn bù fāngbiàn. Yīnwèi wǒ měitiān dōu yòng shǒujī liánxì péngyou, chá dìtú, mǎi dōngxi hé xué zhōngwén. Dànshì, méiyǒu shǒujī yě kěnéng ràng rén gèng qīngsōng. Wǒmen kěnéng huì shǎo kàn duǎn shìpín, duō kàn shū, duō yùndòng, yě huì gèng duō de hé shēnbiān de rén liáotiān. Suǒyǐ wǒ juéde, shǒujī hěn hǎo yòng, dànshì zuì zhòngyào de shì zhǎodào pínghéng.</div>
+            <div class="enline">If there were no phones, I think life would be very inconvenient. I use my phone every day to contact friends, check maps, buy things, and study Chinese. But not having a phone might also make people feel more relaxed. We might watch fewer short videos, read more, exercise more, and talk more with people around us. So I think phones are useful, but the most important thing is to find balance.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="stage" class="slide theme-dream" data-theme="theme-dream">
+      <div class="slide-inner stage reveal">
+        <div class="timer-card">
+          <div><div class="eyebrow">Final Talk</div><h2 style="color:#fff;font-size:54px">轻松说 1 分钟</h2><p style="color:rgba(255,255,255,.7);line-height:1.7">可以停顿，可以想一想，说错了也没关系。</p></div>
+          <div class="timer-ring" id="timerRing"><div class="timer-text" id="timerText">01:00</div></div>
+          <div class="timer-buttons"><button data-min="1">1 min</button><button data-min="2">2 min</button><button data-min="3">3 min</button><button id="pauseTimer">Pause</button><button id="resetTimer">Reset</button></div>
+        </div>
+        <div class="panel">
+          <div class="eyebrow">Speaking Stage</div>
+          <h2>选择一个题目，说一小段。</h2>
+          <div class="chips" data-topicpick>
+            <button class="chip active" data-topic="我和汉语的故事" data-keys="开始学习 / 一个困难 / 一个变化">我和汉语的故事</button>
+            <button class="chip" data-topic="我的好兄弟 / 姐妹" data-keys="性格 / 一件事 / 为什么重要">我的好兄弟 / 姐妹</button>
+            <button class="chip" data-topic="有这样的爱情" data-keys="我的观点 / 理由 / 例子">有这样的爱情</button>
+            <button class="chip" data-topic="网购的快乐与烦恼" data-keys="优点 / 问题 / 我的经历">网购的快乐与烦恼</button>
+            <button class="chip" data-topic="如果没有手机" data-keys="方便 / 麻烦 / 平衡">如果没有手机</button>
+          </div>
+          <div class="question-card" style="margin-top:20px"><div class="q" id="stageTopic">我和汉语的故事</div><div class="hint" id="stageKeys">关键词：开始学习 / 一个困难 / 一个变化</div></div>
+          <div class="rubric"><div><b>结构清楚</b><span>开头、理由、例子、结尾。</span></div><div><b>有自己的想法</b><span>不用完美，但要真实。</span></div><div><b>连接自然</b><span>因为、所以、但是、比如。</span></div><div><b>表达完整</b><span>从短句慢慢变成长句。</span></div></div>
+          <div class="feedback"><h3>让中文更自然一点</h3><div class="feedback-grid"><div><b>先肯定</b>这句话已经可以听懂。</div><div><b>再优化</b>我们让它更自然一点。</div><div><b>最后升级</b>再加一个例子会更完整。</div></div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const body=document.body, progress=document.getElementById('progress'), navLinks=[...document.querySelectorAll('.nav a')];
+    const sections=[...document.querySelectorAll('section.slide')];
+
+    function escapeHTML(str){
+      return String(str).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+    }
+    function softBreakText(str){
+      const raw=String(str||'').trim();
+      if(raw.length < 18) return escapeHTML(raw);
+      return escapeHTML(raw).replace(/([，,；;、])\s*/g,'$1<br>');
+    }
+
+    let sentenceControlId=0;
+    function findTranslationPair(zhEl){
+      let py=null,en=null;
+      let n=zhEl.nextElementSibling;
+      while(n){
+        if(n.classList && (n.classList.contains('zh') || n.classList.contains('q') || n.classList.contains('hint'))) break;
+        if(!py && n.classList && (n.classList.contains('pyline') || n.classList.contains('hint-py'))) py=n;
+        if(!en && n.classList && (n.classList.contains('enline') || n.classList.contains('hint-en'))) en=n;
+        if(py && en) break;
+        n=n.nextElementSibling;
+      }
+      return {py,en};
+    }
+    function makeSentenceButton(label,target,cls){
+      const b=document.createElement('button');
+      b.type='button';
+      b.className='sentence-btn';
+      b.textContent=label;
+      b.addEventListener('click',(ev)=>{
+        ev.preventDefault();
+        ev.stopPropagation();
+        target.classList.toggle(cls);
+        b.classList.toggle('active');
+      });
+      return b;
+    }
+    function addSentenceControls(root=document){
+      root.querySelectorAll('.zh,.q,.hint.zh').forEach((zhEl)=>{
+        if(Array.from(zhEl.children).some(child=>child.classList&&child.classList.contains('sentence-tools'))) return;
+        const {py,en}=findTranslationPair(zhEl);
+        if(!py && !en) return;
+        const tools=document.createElement('span');
+        tools.className='sentence-tools';
+        if(py) tools.appendChild(makeSentenceButton('拼音',py,'line-py-on'));
+        if(en) tools.appendChild(makeSentenceButton('EN',en,'line-en-on'));
+        zhEl.appendChild(tools);
+      });
+    }
+    function bindQuestionCardControls(card){
+      if(!card) return;
+      card.querySelectorAll('.sentence-tools').forEach(x=>x.remove());
+      card.querySelectorAll('.line-control-row').forEach(x=>x.remove());
+      [
+        {zh:card.querySelector('.q'), py:card.querySelector('.q-py'), en:card.querySelector('.q-en'), inline:true},
+        {zh:card.querySelector('.hint.zh'), py:card.querySelector('.hint-py'), en:card.querySelector('.hint-en'), inline:false}
+      ].forEach(pair=>{
+        if(!pair.zh || (!pair.py && !pair.en)) return;
+        const row=document.createElement(pair.inline?'span':'div');
+        row.className='line-control-row' + (pair.inline?' inline':'');
+        if(pair.py) row.appendChild(makeSentenceButton('拼音',pair.py,'line-py-on'));
+        if(pair.en) row.appendChild(makeSentenceButton('EN',pair.en,'line-en-on'));
+        pair.zh.appendChild(row);
+      });
+    }
+
+    function applySoftBreaks(root=document){
+      root.querySelectorAll('.zh,.q,.hint').forEach(el=>{
+        if(el.dataset.noBreak==='1') return;
+        if(el.children.length) return;
+        const raw=el.textContent.trim();
+        if(!raw) return;
+        el.innerHTML=softBreakText(raw);
+      });
+    }
+
+    function setTheme(cls){body.className=cls || 'theme-story'}
+    const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.reveal').forEach((el,i)=>setTimeout(()=>el.classList.add('in'),i*80)); setTheme(e.target.dataset.theme); navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));}})},{threshold:.45});
+    sections.forEach(s=>io.observe(s));
+    window.addEventListener('scroll',()=>{const h=document.documentElement; progress.style.width=((h.scrollTop)/(h.scrollHeight-h.clientHeight)*100)+'%'});
+
+    document.querySelectorAll('[data-mood-group]').forEach(group=>{
+      const response=group.parentElement.querySelector('.response');
+      group.querySelectorAll('.mood').forEach(btn=>btn.addEventListener('click',()=>{group.querySelectorAll('.mood').forEach(b=>b.classList.remove('active'));btn.classList.add('active');response.textContent=btn.dataset.response;response.classList.add('show')}));
+    });
+
+    function renderQuestion(card,level='easy'){
+      const data=JSON.parse(card.dataset.questions||'{}');
+      if(!data[level]) return;
+      const item=data[level];
+      card.querySelector('.q').innerHTML=softBreakText(item.q||'');
+      const py=card.querySelector('.q-py') || card.querySelector('.pyline'); if(py) {py.textContent=item.py||''; py.classList.remove('line-py-on');}
+      const en=card.querySelector('.q-en') || card.querySelector('.enline'); if(en) {en.textContent=item.en||''; en.classList.remove('line-en-on');}
+      const hint=card.querySelector('.hint.zh'); if(hint) hint.innerHTML=softBreakText(item.hint||'');
+      const hpy=card.querySelector('.hint-py'); if(hpy) hpy.textContent=item.hintPy||'';
+      const hen=card.querySelector('.hint-en'); if(hen) hen.textContent=item.hintEn||'';
+    }
+    document.querySelectorAll('[data-difficulty]').forEach(box=>{const card=box.parentElement.querySelector('[data-questions]'); renderQuestion(card,'easy'); applySoftBreaks(card); bindQuestionCardControls(card); box.querySelectorAll('.diff-btn').forEach(btn=>btn.addEventListener('click',()=>{box.querySelectorAll('.diff-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderQuestion(card,btn.dataset.level); applySoftBreaks(card); bindQuestionCardControls(card)}));});
+
+    document.querySelectorAll('.lang-tools').forEach(group=>{
+      const scope=group.closest('.panel') || group.closest('.slide') || group.parentElement;
+      group.querySelectorAll('.lang-toggle').forEach(btn=>btn.addEventListener('click',()=>{
+        btn.classList.toggle('active');
+        if(btn.dataset.lang==='py') scope.classList.toggle('show-py');
+        if(btn.dataset.lang==='en') scope.classList.toggle('show-en');
+      }));
+    });
+
+    document.querySelectorAll('.reveal-btn').forEach(btn=>btn.addEventListener('click',()=>{const drawer=btn.nextElementSibling; if(drawer&&drawer.classList.contains('drawer')) drawer.classList.toggle('open')}));
+
+
+
+    document.querySelectorAll('[data-dream-builder]').forEach(box=>{
+      const output=box.querySelector('.dream-output');
+      box.querySelectorAll('.dream-tab').forEach(btn=>btn.addEventListener('click',()=>{
+        box.querySelectorAll('.dream-tab').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        if(output){
+          output.innerHTML=`<div class="zh">${softBreakText(btn.dataset.zh||'')}</div><div class="pyline">${btn.dataset.py||''}</div><div class="enline">${btn.dataset.en||''}</div>`;
+          addSentenceControls(output);
+        }
+      }));
+    });
+
+    document.querySelectorAll('[data-segment]').forEach(box=>{
+      const output=box.parentElement.querySelector('.segment-output');
+      box.querySelectorAll('.segment-tab').forEach(btn=>btn.addEventListener('click',()=>{
+        box.querySelectorAll('.segment-tab').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        if(output){
+          output.innerHTML=`<div class="zh">${softBreakText(btn.dataset.zh||'')}</div><div class="pyline">${btn.dataset.py||''}</div><div class="enline">${btn.dataset.en||''}</div>`;
+          addSentenceControls(output);
+        }
+      }));
+    });
+
+    document.querySelectorAll('[data-chipbox]').forEach(box=>{const card=box.parentElement.querySelector('.chip-card'); box.querySelectorAll('.chip').forEach(chip=>chip.addEventListener('click',()=>{box.querySelectorAll('.chip').forEach(c=>c.classList.remove('active')); chip.classList.add('active'); card.innerHTML=`<div class="study-card"><b>${chip.dataset.title}</b><div class="zh">${softBreakText(chip.dataset.sampleZh||'')}</div><div class="pyline">${chip.dataset.samplePy||''}</div><div class="enline">${chip.dataset.sampleEn||chip.dataset.en||''}</div></div>`; card.classList.add('show'); addSentenceControls(card)}));});
+
+    document.querySelectorAll('[data-opinion]').forEach(box=>{const output=box.parentElement.querySelector('.opinion-output'); box.querySelectorAll('.scale-btn').forEach(btn=>btn.addEventListener('click',()=>{box.querySelectorAll('.scale-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active'); output.innerHTML=`<div class="study-card"><div class="zh">${softBreakText(btn.dataset.textZh||'')}</div><div class="pyline">${btn.dataset.textPy||''}</div><div class="enline">${btn.dataset.textEn||''}</div></div>`; output.classList.add('show'); addSentenceControls(output)}));});
+
+    document.querySelectorAll('[data-scenes]').forEach(box=>{const output=box.parentElement.querySelector('.scene-output'); box.querySelectorAll('.phone-scene').forEach(scene=>scene.addEventListener('click',()=>{output.innerHTML=`<div class="study-card"><div class="zh">${softBreakText(scene.dataset.answerZh||'')}</div><div class="pyline">${scene.dataset.answerPy||''}</div><div class="enline">${scene.dataset.answerEn||''}</div></div>`; output.classList.add('show'); addSentenceControls(output)}));});
+
+    document.querySelectorAll('.choice-card').forEach(c=>c.addEventListener('click',()=>{const parent=c.parentElement; parent.querySelectorAll('.choice-card').forEach(x=>x.classList.remove('active')); c.classList.add('active')}));
+
+    document.querySelectorAll('[data-topicpick] .chip').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('[data-topicpick] .chip').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.getElementById('stageTopic').textContent=btn.dataset.topic;document.getElementById('stageKeys').textContent='关键词：'+btn.dataset.keys;}));
+
+    let duration=60, remaining=60, interval=null, running=false;
+    const timerText=document.getElementById('timerText'), timerRing=document.getElementById('timerRing');
+    function fmt(s){const m=Math.floor(s/60), sec=s%60; return String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0')}
+    function draw(){timerText.textContent=fmt(remaining); timerRing.style.setProperty('--deg', ((duration-remaining)/duration*360)+'deg')}
+    function start(min){duration=remaining=min*60; clearInterval(interval); running=true; draw(); interval=setInterval(()=>{if(!running)return; remaining=Math.max(0,remaining-1); draw(); if(remaining===0){clearInterval(interval); running=false;}},1000)}
+    document.querySelectorAll('.timer-buttons [data-min]').forEach(b=>b.addEventListener('click',()=>start(Number(b.dataset.min))));
+    document.getElementById('pauseTimer').addEventListener('click',()=>{running=!running; document.getElementById('pauseTimer').textContent=running?'Pause':'Resume'});
+    document.getElementById('resetTimer').addEventListener('click',()=>{clearInterval(interval); running=false; remaining=duration; draw(); document.getElementById('pauseTimer').textContent='Pause'});
+    applySoftBreaks();
+    document.querySelectorAll('[data-questions]').forEach(card=>bindQuestionCardControls(card));
+    addSentenceControls();
+    draw();
+  </script>
+</body>
+</html>

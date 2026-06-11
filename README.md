@@ -16,6 +16,7 @@ The Render service is `yiyue-Chinese-courseware`.
 - `assets/` contains lesson media.
 - `courseware_server.py` is the Python web server used by Render.
 - `server.py` is the Render start entrypoint.
+- `data/course_catalog.json` controls the homepage course cards.
 - `data/access_rules.json` is the default course access list.
 - `docs/` contains operating notes for deployment and course management.
 

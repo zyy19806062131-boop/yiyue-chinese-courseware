@@ -171,16 +171,14 @@
       inset:0;
       background:linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.20));
     }
-    .thumb.duanwu{background-image:url("assets/duanwu-v28/img-009-1d9b4cd5fe619c40.jpg")}
-    .thumb.xian{background-image:url("assets/travel_story/scene-01-opening.png")}
-    .thumb.restaurant{background-image:linear-gradient(135deg,#fff7ed,#dbeafe 52%,#ecfeff)}
-    .thumb.restaurant:before{
-      content:"点餐";
+    .thumb.generated{background-image:linear-gradient(135deg,#fff7ed,#dbeafe 52%,#ecfeff)}
+    .thumb span{
       position:absolute;
       inset:auto 14px 14px auto;
       z-index:1;
-      width:72px;
+      min-width:72px;
       height:72px;
+      padding:0 10px;
       border-radius:8px;
       display:grid;
       place-items:center;
@@ -262,12 +260,7 @@
         <h1>Yiyue Chinese Courseware</h1>
         <p class="sub">课程入口、学生访问和后台管理集中在这里。</p>
       </div>
-      <nav class="nav" aria-label="课程分类">
-        <button class="active" data-filter="all">全部课程 <span class="count">3</span></button>
-        <button data-filter="culture">文化专题 <span class="count">1</span></button>
-        <button data-filter="travel">旅游表达 <span class="count">1</span></button>
-        <button data-filter="speaking">场景口语 <span class="count">1</span></button>
-      </nav>
+      <nav class="nav" id="categoryNav" aria-label="课程分类"></nav>
       <a class="admin" href="/admin">管理员后台 <span class="count">密码</span></a>
     </aside>
 
@@ -283,83 +276,92 @@
       </div>
 
       <section class="summary" aria-label="课程统计">
-        <div class="metric"><b>3</b><span>已发布课件</span></div>
+        <div class="metric"><b id="publishedCount">0</b><span>已发布课件</span></div>
         <div class="metric"><b>1</b><span>统一学生密码</span></div>
         <div class="metric"><b>Render</b><span>自动部署中</span></div>
       </section>
 
-      <section class="course-grid" id="courseGrid">
-        <a class="course" data-category="culture" data-search="端午节 龙舟 粽子 文化 duanwu festival" href="lessons/culture/duanwu-v28.html">
-          <div class="thumb duanwu"></div>
-          <div class="course-body">
-            <div class="label">文化专题</div>
-            <h3>端午节 · 龙舟与粽子</h3>
-            <p>用节日故事、场景表达和文化任务进入端午主题。</p>
-            <div class="tags"><span>端午节</span><span>文化</span><span>V28</span></div>
-            <div class="open">打开课件 <span>→</span></div>
-          </div>
-        </a>
-
-        <a class="course" data-category="travel" data-search="谈旅游 西安 旅行 新目标汉语口语 unit 6 travel xian" href="lessons/travel/xian-travel.html">
-          <div class="thumb xian"></div>
-          <div class="course-body">
-            <div class="label">旅游表达</div>
-            <h3>谈旅游｜西安旅游</h3>
-            <p>围绕西安行程、景点推荐和旅行表达做口语练习。</p>
-            <div class="tags"><span>西安</span><span>旅游</span><span>Unit 6</span></div>
-            <div class="open">打开课件 <span>→</span></div>
-          </div>
-        </a>
-
-        <a class="course" data-category="speaking" data-search="饭店 点餐 餐厅 菜单 饮食文化 restaurant ordering speaking" href="lessons/speaking/restaurant-ordering.html">
-          <div class="thumb restaurant"></div>
-          <div class="course-body">
-            <div class="label">场景口语</div>
-            <h3>饭店点餐</h3>
-            <p>从入座、看菜单、点菜到表达口味，完成一组餐厅任务。</p>
-            <div class="tags"><span>点餐</span><span>餐厅</span><span>Speaking</span></div>
-            <div class="open">打开课件 <span>→</span></div>
-          </div>
-        </a>
-      </section>
+      <section class="course-grid" id="courseGrid"></section>
     </section>
   </main>
   <script>
-    const buttons = [...document.querySelectorAll('[data-filter]')];
-    const cards = [...document.querySelectorAll('.course')];
+    const categories = [
+      ['all', '全部课程'],
+      ['culture', '文化专题'],
+      ['travel', '旅游表达'],
+      ['speaking', '场景口语'],
+      ['yct', '少儿中文'],
+      ['tools', '训练工具']
+    ];
+    const categoryNav = document.getElementById('categoryNav');
+    const courseGrid = document.getElementById('courseGrid');
+    const publishedCount = document.getElementById('publishedCount');
     const search = document.getElementById('search');
+    let courses = [];
     let active = 'all';
 
-    function applyFilters(){
-      const q = search.value.trim().toLowerCase();
-      let shown = 0;
-      cards.forEach(card => {
-        const matchCategory = active === 'all' || card.dataset.category === active;
-        const matchText = !q || card.dataset.search.toLowerCase().includes(q) || card.textContent.toLowerCase().includes(q);
-        const visible = matchCategory && matchText;
-        card.style.display = visible ? '' : 'none';
-        if (visible) shown += 1;
-      });
-      let empty = document.querySelector('.empty');
-      if (!shown) {
-        if (!empty) {
-          empty = document.createElement('div');
-          empty.className = 'empty';
-          empty.textContent = '没有找到匹配的课件。';
-          document.getElementById('courseGrid').appendChild(empty);
-        }
-      } else if (empty) {
-        empty.remove();
-      }
+    function esc(value){
+      return String(value || '').replace(/[&<>"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[char]));
     }
 
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        active = button.dataset.filter;
-        buttons.forEach(item => item.classList.toggle('active', item === button));
-        applyFilters();
+    function renderNav(){
+      categoryNav.innerHTML = categories.map(([id, label]) => {
+        const count = id === 'all' ? courses.length : courses.filter(course => course.category === id).length;
+        return `<button class="${active === id ? 'active' : ''}" data-filter="${id}">${label} <span class="count">${count}</span></button>`;
+      }).join('');
+      categoryNav.querySelectorAll('[data-filter]').forEach(button => {
+        button.addEventListener('click', () => {
+          active = button.dataset.filter;
+          renderNav();
+          renderCourses();
+        });
       });
-    });
+    }
+
+    function card(course){
+      const searchText = [course.title, course.subtitle, course.categoryName, course.search, ...(course.tags || [])].join(' ');
+      const thumbStyle = course.thumbnail ? ` style="background-image:url('${esc(course.thumbnail)}')"` : '';
+      const thumbClass = course.thumbnail ? 'thumb' : 'thumb generated';
+      const initials = course.thumbnail ? '' : `<span>${esc(course.initials || course.categoryName || '课件')}</span>`;
+      const tags = (course.tags || []).map(tag => `<span>${esc(tag)}</span>`).join('');
+      return `<a class="course" data-category="${esc(course.category)}" data-search="${esc(searchText)}" href="${esc(course.path)}">
+        <div class="${thumbClass}"${thumbStyle}>${initials}</div>
+        <div class="course-body">
+          <div class="label">${esc(course.categoryName)}</div>
+          <h3>${esc(course.title)}</h3>
+          <p>${esc(course.subtitle)}</p>
+          <div class="tags">${tags}</div>
+          <div class="open">打开课件 <span>→</span></div>
+        </div>
+      </a>`;
+    }
+
+    function renderCourses(){
+      const q = search.value.trim().toLowerCase();
+      const list = courses.filter(course => {
+        const matchCategory = active === 'all' || course.category === active;
+        const searchText = [course.title, course.subtitle, course.categoryName, course.search, ...(course.tags || [])].join(' ').toLowerCase();
+        return matchCategory && (!q || searchText.includes(q));
+      });
+      courseGrid.innerHTML = list.length ? list.map(card).join('') : '<div class="empty">没有找到匹配的课件。</div>';
+    }
+
+    function applyFilters(){
+      renderCourses();
+    }
+
+    fetch('data/course_catalog.json')
+      .then(response => response.json())
+      .then(data => {
+        courses = data;
+        publishedCount.textContent = courses.length;
+        renderNav();
+        renderCourses();
+      })
+      .catch(() => {
+        categoryNav.innerHTML = '<button class="active">全部课程 <span class="count">0</span></button>';
+        courseGrid.innerHTML = '<div class="empty">课程目录暂时无法读取。</div>';
+      });
     search.addEventListener('input', applyFilters);
   </script>
 </body>

@@ -521,12 +521,16 @@ class CoursewareHandler(BaseHTTPRequestHandler):
         if not lesson.get("password_hashes"):
             self.send_html(HTTPStatus.FORBIDDEN, lesson_login_page(lesson, "这门课还没有设置访问密码。"))
             return
-        if password_hash(password) not in lesson["password_hashes"]:
+        matched_hash = password_hash(password)
+        if matched_hash not in lesson["password_hashes"]:
             self.send_html(HTTPStatus.UNAUTHORIZED, lesson_login_page(lesson, "访问密码不正确。"))
             return
 
         session = self.current_session()
         allowed = set(session.get("lessons", []))
+        for item in merged_rules()["lessons"]:
+            if matched_hash in item.get("password_hashes", []):
+                allowed.add(item["path"])
         allowed.add(lesson["path"])
         session["lessons"] = sorted(allowed)
         self.send_response(HTTPStatus.SEE_OTHER)
