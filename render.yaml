@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: niki-hskk-courseware
+    name: yiyue-Chinese-courseware
     runtime: python
     plan: free
     buildCommand: pip install -r requirements.txt
