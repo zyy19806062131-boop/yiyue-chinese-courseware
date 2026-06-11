@@ -240,6 +240,8 @@ def admin_page():
     .row{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
     .check{display:flex;align-items:center;gap:8px;font-weight:800}.check input{width:auto}
     .status{font-weight:800}.ok{color:#087443}.bad{color:#b42318}
+    .password-state{margin-top:8px;color:#087443;font-size:13px;font-weight:800}
+    .password-state.empty{color:#b42318}
     .hidden{display:none}
   </style>
 </head>
@@ -305,12 +307,19 @@ def admin_page():
           <label>显示名称</label>
           <input class="title">
           <label>这门课的新密码</label>
-          <input class="passwords" placeholder="不改就留空；想改就直接输入新密码">
+          <input class="passwords" type="password">
+          <div class="password-state"></div>
         `;
+        const passwordText = lesson.passwordCount
+          ? `已设置 ${lesson.passwordCount} 个密码；为安全起见不显示明文。输入新密码会替换旧密码。`
+          : '还没有密码。输入一个新密码后点“保存全部”。';
         card.querySelector('h2').textContent = lesson.title;
         card.querySelector('.meta').textContent = `${lesson.path} · 当前状态：${lesson.passwordCount ? '已设置密码' : '还没有密码'}`;
         card.querySelector('.title').value = lesson.title;
         card.querySelector('.enabled').checked = lesson.enabled;
+        card.querySelector('.passwords').placeholder = lesson.passwordCount ? '已设置密码；留空则保持不变' : '输入这门课的新密码';
+        card.querySelector('.password-state').textContent = passwordText;
+        card.querySelector('.password-state').classList.toggle('empty', !lesson.passwordCount);
         lessonsEl.appendChild(card);
       }
     }
@@ -354,7 +363,7 @@ def admin_page():
         saveStatus.textContent = '保存中...';
         await api('/api/admin/rules', {method: 'POST', body: JSON.stringify({lessons})});
         saveStatus.className = 'status ok';
-        saveStatus.textContent = '已保存';
+        saveStatus.textContent = '已保存。密码已生效；后台不会显示明文密码。';
         await loadRules();
       } catch (error) {
         saveStatus.className = 'status bad';
