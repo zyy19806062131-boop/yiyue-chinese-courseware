@@ -26,7 +26,7 @@
       "旅游",
       "Unit 6"
     ],
-    "thumbnail": "assets/travel_story/scene-01-opening.png",
+    "initials": "西安",
     "search": "谈旅游 西安 旅行 新目标汉语口语 unit 6 travel xian"
   },
   {
@@ -43,51 +43,6 @@
     ],
     "initials": "点餐",
     "search": "饭店 点餐 餐厅 菜单 饮食文化 restaurant ordering speaking"
-  },
-  {
-    "id": "travel-story",
-    "title": "林安的西安推荐",
-    "category": "travel",
-    "categoryName": "旅游表达",
-    "subtitle": "西安推荐主题故事课件，适合旅行表达和推荐理由练习。",
-    "path": "travel_story_lesson.html",
-    "tags": [
-      "西安",
-      "推荐",
-      "Story"
-    ],
-    "thumbnail": "assets/travel_story/scene-05-finish.png",
-    "search": "林安 西安 推荐 旅行 travel story"
-  },
-  {
-    "id": "tone-trainer",
-    "title": "声调旋律训练器",
-    "category": "tools",
-    "categoryName": "训练工具",
-    "subtitle": "普通话声调旋律训练器，适合课前热身和发音专项练习。",
-    "path": "tone_trainer.html",
-    "tags": [
-      "声调",
-      "发音",
-      "Trainer"
-    ],
-    "initials": "声调",
-    "search": "声调 旋律 普通话 发音 tone trainer"
-  },
-  {
-    "id": "tone-trainer-voiced",
-    "title": "声调旋律训练器 · 语音版",
-    "category": "tools",
-    "categoryName": "训练工具",
-    "subtitle": "带语音素材的声调练习版本，用于听辨和跟读。",
-    "path": "tone_trainer_voiced.html",
-    "tags": [
-      "声调",
-      "语音",
-      "Audio"
-    ],
-    "initials": "语音",
-    "search": "声调 旋律 语音 voiced audio tone trainer"
   },
   {
     "id": "yct3-l3-game",

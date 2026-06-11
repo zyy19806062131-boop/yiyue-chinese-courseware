@@ -22,12 +22,6 @@ DEFAULT_ADMIN_PASSWORD_HASH = "d13d2bff8c84535fa795b6b034d05a71210c189ec9e973b99
 ADMIN_PASSWORD_HASH = os.environ.get("ADMIN_PASSWORD_HASH", DEFAULT_ADMIN_PASSWORD_HASH)
 SESSION_COOKIE = "courseware_session"
 
-DEFAULT_DATA_PATHS = (
-    ROOT / "trainer_data.private.json",
-    ROOT / "trainer_data.json",
-)
-CODES_PATH = Path(os.environ.get("ACCESS_CODES_PATH", ROOT / "access_codes.private.json"))
-
 PUBLIC_HTML = {
     "/",
     "/index.html",
@@ -35,61 +29,6 @@ PUBLIC_HTML = {
 PUBLIC_PREFIXES = (
     "/assets/",
 )
-
-
-def default_data_path():
-    configured = os.environ.get("TRAINER_DATA_PATH")
-    if configured:
-        return Path(configured)
-
-    for path in DEFAULT_DATA_PATHS:
-        if path.exists():
-            return path
-
-    return DEFAULT_DATA_PATHS[-1]
-
-
-def load_json(path, env_key):
-    raw = os.environ.get(env_key)
-    if raw:
-        return json.loads(raw)
-
-    with Path(path).open("r", encoding="utf-8") as f:
-        return json.load(f)
-
-
-def build_payload(code):
-    data = load_json(default_data_path(), "TRAINER_DATA_JSON")
-    access_codes = load_json(CODES_PATH, "ACCESS_CODES_JSON")
-    profile = access_codes.get(code)
-    if not profile:
-        return None
-
-    allowed = profile.get("decks")
-    all_decks = data.get("decks", [])
-    if allowed == "all":
-        decks = all_decks
-    else:
-        allowed_set = set(allowed or [])
-        decks = [deck for deck in all_decks if deck.get("id") in allowed_set]
-
-    allowed_sentence_ids = {
-        sentence.get("id")
-        for deck in decks
-        for sentence in deck.get("sents", [])
-        if sentence.get("id")
-    }
-    audio = {
-        sentence_id: voices
-        for sentence_id, voices in data.get("audio", {}).items()
-        if sentence_id in allowed_sentence_ids
-    }
-
-    return {
-        "label": profile.get("label", "ACCESS GRANTED"),
-        "decks": decks,
-        "audio": audio,
-    }
 
 
 def password_hash(password):
@@ -486,9 +425,7 @@ class CoursewareHandler(BaseHTTPRequestHandler):
     def do_POST(self):
         parsed = urlparse(self.path)
         try:
-            if parsed.path == "/api/login":
-                self.handle_trainer_login()
-            elif parsed.path == "/api/lesson-login":
+            if parsed.path == "/api/lesson-login":
                 self.handle_lesson_login()
             elif parsed.path == "/api/admin-login":
                 self.handle_admin_login()
@@ -500,15 +437,6 @@ class CoursewareHandler(BaseHTTPRequestHandler):
             self.send_json(HTTPStatus.BAD_REQUEST, {"error": str(exc)})
         except Exception as exc:
             self.send_json(HTTPStatus.INTERNAL_SERVER_ERROR, {"error": f"服务器错误: {exc}"})
-
-    def handle_trainer_login(self):
-        body = self.read_body(limit=4096)
-        code = str(body.get("code", "")).strip()
-        payload = build_payload(code)
-        if not payload:
-            self.send_json(HTTPStatus.UNAUTHORIZED, {"error": "口令不对"})
-            return
-        self.send_json(HTTPStatus.OK, payload)
 
     def handle_lesson_login(self):
         body = self.read_body(limit=8192)

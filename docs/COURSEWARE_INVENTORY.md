@@ -10,9 +10,6 @@ library.
 | 文化专题 | 端午节 · 龙舟与粽子 | `lessons/culture/duanwu-v28.html` |
 | 旅游表达 | 谈旅游｜西安旅游 | `lessons/travel/xian-travel.html` |
 | 场景口语 | 饭店点餐 | `lessons/speaking/restaurant-ordering.html` |
-| 旅游表达 | 林安的西安推荐 | `travel_story_lesson.html` |
-| 训练工具 | 声调旋律训练器 | `tone_trainer.html` |
-| 训练工具 | 声调旋律训练器 · 语音版 | `tone_trainer_voiced.html` |
 | 少儿中文 | YCT3 L3 · 我在画画儿呢 | `YCT3_L3_GAME_v6_experience_upgrade.html` |
 | 文化专题 | 百家争鸣 | `baijiazhengmingV24.html` |
 | 场景口语 | 你好，邻居！ | `changjingkouyu/lesson01/lesson01_nihao_neighbor_final_v10_audio_fixed.html` |

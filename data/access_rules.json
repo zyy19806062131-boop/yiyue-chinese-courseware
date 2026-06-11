@@ -28,33 +28,6 @@
       ]
     },
     {
-      "id": "travel_story_lesson",
-      "title": "林安的西安推荐",
-      "path": "travel_story_lesson.html",
-      "enabled": true,
-      "password_hashes": [
-        "a73a5a1e7fc9bd069598751bee9a5ce559dcd96d73866a5f51a1a20c2cac498f"
-      ]
-    },
-    {
-      "id": "tone_trainer",
-      "title": "声调旋律训练器",
-      "path": "tone_trainer.html",
-      "enabled": true,
-      "password_hashes": [
-        "a73a5a1e7fc9bd069598751bee9a5ce559dcd96d73866a5f51a1a20c2cac498f"
-      ]
-    },
-    {
-      "id": "tone_trainer_voiced",
-      "title": "声调旋律训练器 · 语音版",
-      "path": "tone_trainer_voiced.html",
-      "enabled": true,
-      "password_hashes": [
-        "a73a5a1e7fc9bd069598751bee9a5ce559dcd96d73866a5f51a1a20c2cac498f"
-      ]
-    },
-    {
       "id": "YCT3_L3",
       "title": "YCT3 · Lesson 3 入口",
       "path": "YCT3_L3.html",
