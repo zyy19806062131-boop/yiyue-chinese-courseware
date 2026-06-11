@@ -18,7 +18,8 @@ from urllib.parse import parse_qs, unquote, urlparse
 ROOT = Path(__file__).resolve().parent
 RULES_PATH = ROOT / "data" / "access_rules.json"
 SESSION_SECRET = os.environ.get("SESSION_SECRET") or secrets.token_hex(32)
-ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "admin2026")
+DEFAULT_ADMIN_PASSWORD_HASH = "2c70831f7b3186ba254d0dd94d4e123cdaccc608644137ea790ec53b7e7e936f"
+ADMIN_PASSWORD_HASH = os.environ.get("ADMIN_PASSWORD_HASH", DEFAULT_ADMIN_PASSWORD_HASH)
 SESSION_COOKIE = "courseware_session"
 
 DEFAULT_DATA_PATHS = (
@@ -518,7 +519,12 @@ class CoursewareHandler(BaseHTTPRequestHandler):
     def handle_admin_login(self):
         body = self.read_body(limit=4096)
         password = str(body.get("password", ""))
-        if not hmac.compare_digest(password, ADMIN_PASSWORD):
+        valid_plaintext = os.environ.get("ADMIN_PASSWORD")
+        if valid_plaintext:
+            valid = hmac.compare_digest(password, valid_plaintext)
+        else:
+            valid = hmac.compare_digest(password_hash(password), ADMIN_PASSWORD_HASH)
+        if not valid:
             self.send_json(HTTPStatus.UNAUTHORIZED, {"error": "管理员密码不正确"})
             return
         session = self.current_session()
