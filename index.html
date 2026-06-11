@@ -3,45 +3,364 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Chinese Courseware · Latest Lessons</title>
+  <title>Yiyue Chinese Courseware</title>
   <style>
-    :root{--bg:#f7f3ea;--ink:#1f2328;--muted:#6c6257;--card:#fffaf2;--line:#ddd1bf;--accent:#a64d2a;--accent2:#2f6f73}
-    *{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;color:var(--ink);background:radial-gradient(circle at 12% 14%,rgba(166,77,42,.13),transparent 32%),radial-gradient(circle at 82% 18%,rgba(47,111,115,.15),transparent 34%),linear-gradient(135deg,#fffaf2,#f0ebe3)}
-    main{width:min(1180px,92vw);margin:0 auto;padding:56px 0 72px}header{display:flex;align-items:flex-start;justify-content:space-between;gap:24px}h1{margin:0 0 12px;font-size:clamp(38px,6vw,72px);letter-spacing:-.04em}p{color:var(--muted);line-height:1.7;font-size:17px}.admin{display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 14px;border:1px solid var(--line);border-radius:8px;background:#fffaf2;color:var(--ink);font-weight:800;text-decoration:none;white-space:nowrap}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:28px}.card{display:flex;flex-direction:column;min-height:292px;padding:28px;border:1px solid var(--line);border-radius:18px;background:rgba(255,250,242,.9);box-shadow:0 20px 60px rgba(64,45,25,.13);text-decoration:none;color:inherit}.card:hover{transform:translateY(-3px);border-color:var(--accent);transition:.18s ease}.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent2);font-weight:800}.card h2{margin:18px 0 10px;font-size:30px}.meta{margin-top:auto;display:flex;gap:8px;flex-wrap:wrap}.meta span{padding:7px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:13px;background:#fff}.button{margin-top:20px;color:var(--accent);font-weight:800}@media(max-width:980px){.grid{grid-template-columns:1fr 1fr}}@media(max-width:680px){header{display:block}.admin{margin-top:12px}.grid{grid-template-columns:1fr}main{padding-top:36px}.card{min-height:240px}}
+    :root{
+      --bg:#f4f6f8;
+      --surface:#ffffff;
+      --surface-2:#f9fafb;
+      --ink:#202832;
+      --muted:#667085;
+      --line:#d7dde6;
+      --accent:#0f766e;
+      --accent-2:#9a3412;
+      --focus:#2563eb;
+      --shadow:0 18px 48px rgba(27,39,54,.10);
+    }
+    *{box-sizing:border-box}
+    html{background:var(--bg)}
+    body{
+      margin:0;
+      min-height:100vh;
+      color:var(--ink);
+      font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+      background:linear-gradient(180deg,#fbfcfd 0,#f4f6f8 340px,#eef2f5 100%);
+    }
+    a{color:inherit}
+    .shell{
+      width:min(1240px,calc(100% - 40px));
+      margin:0 auto;
+      padding:28px 0 48px;
+      display:grid;
+      grid-template-columns:280px minmax(0,1fr);
+      gap:22px;
+    }
+    .sidebar{
+      position:sticky;
+      top:20px;
+      align-self:start;
+      min-height:calc(100vh - 56px);
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+      padding:22px;
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:rgba(255,255,255,.86);
+      box-shadow:var(--shadow);
+    }
+    .brand{display:grid;gap:8px}
+    .mark{
+      width:42px;
+      height:42px;
+      border-radius:8px;
+      display:grid;
+      place-items:center;
+      background:#14332f;
+      color:#fff;
+      font-weight:900;
+      letter-spacing:.02em;
+    }
+    h1{margin:0;font-size:24px;line-height:1.15;letter-spacing:0}
+    .sub{margin:0;color:var(--muted);line-height:1.65;font-size:14px}
+    .nav{display:grid;gap:8px;margin-top:8px}
+    .nav button,.admin{
+      height:42px;
+      border-radius:8px;
+      border:1px solid transparent;
+      padding:0 12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      background:transparent;
+      color:var(--ink);
+      font:700 14px/1 inherit;
+      text-align:left;
+      text-decoration:none;
+      cursor:pointer;
+    }
+    .nav button:hover,.admin:hover{background:var(--surface-2);border-color:var(--line)}
+    .nav button.active{background:#e7f5f2;border-color:#afd8d2;color:#0b5f59}
+    .count{
+      min-width:24px;
+      height:24px;
+      border-radius:999px;
+      display:grid;
+      place-items:center;
+      padding:0 7px;
+      background:#eef2f6;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:800;
+    }
+    .admin{
+      margin-top:auto;
+      border-color:#cfd7e3;
+      background:#fff;
+    }
+    .content{min-width:0}
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:18px;
+    }
+    .title-block h2{margin:0;font-size:34px;line-height:1.1;letter-spacing:0}
+    .title-block p{margin:8px 0 0;color:var(--muted);font-size:15px;line-height:1.6}
+    .tools{display:flex;gap:10px;align-items:center}
+    .search{
+      width:280px;
+      height:42px;
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:#fff;
+      color:var(--ink);
+      padding:0 12px;
+      font-size:14px;
+    }
+    .search:focus{outline:2px solid rgba(37,99,235,.18);border-color:var(--focus)}
+    .summary{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+      margin-bottom:18px;
+    }
+    .metric{
+      border:1px solid var(--line);
+      border-radius:8px;
+      padding:16px;
+      background:#fff;
+    }
+    .metric b{display:block;font-size:24px;line-height:1}
+    .metric span{display:block;margin-top:8px;color:var(--muted);font-size:13px}
+    .course-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:14px;
+    }
+    .course{
+      min-height:354px;
+      display:flex;
+      flex-direction:column;
+      overflow:hidden;
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:#fff;
+      box-shadow:0 10px 28px rgba(27,39,54,.07);
+      text-decoration:none;
+      transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease;
+    }
+    .course:hover{
+      transform:translateY(-2px);
+      border-color:#9fb0c3;
+      box-shadow:0 18px 38px rgba(27,39,54,.12);
+    }
+    .thumb{
+      height:130px;
+      background:#dfe6ec;
+      background-size:cover;
+      background-position:center;
+      border-bottom:1px solid var(--line);
+      position:relative;
+    }
+    .thumb:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.20));
+    }
+    .thumb.duanwu{background-image:url("assets/duanwu-v28/img-009-1d9b4cd5fe619c40.jpg")}
+    .thumb.xian{background-image:url("assets/travel_story/scene-01-opening.png")}
+    .thumb.restaurant{background-image:linear-gradient(135deg,#fff7ed,#dbeafe 52%,#ecfeff)}
+    .thumb.restaurant:before{
+      content:"点餐";
+      position:absolute;
+      inset:auto 14px 14px auto;
+      z-index:1;
+      width:72px;
+      height:72px;
+      border-radius:8px;
+      display:grid;
+      place-items:center;
+      background:#7c2d12;
+      color:#fff7ed;
+      font-weight:900;
+      font-size:22px;
+      box-shadow:0 12px 24px rgba(124,45,18,.20);
+    }
+    .course-body{padding:18px;display:flex;flex-direction:column;flex:1}
+    .label{
+      width:max-content;
+      max-width:100%;
+      padding:5px 8px;
+      border-radius:6px;
+      background:#edf7f5;
+      color:#0f766e;
+      font-size:12px;
+      font-weight:900;
+      line-height:1.2;
+    }
+    .course h3{margin:14px 0 8px;font-size:22px;line-height:1.25;letter-spacing:0}
+    .course p{margin:0;color:var(--muted);line-height:1.65;font-size:14px}
+    .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:16px}
+    .tags span{
+      padding:5px 8px;
+      border:1px solid #dce2ea;
+      border-radius:999px;
+      color:#5f6b7a;
+      background:#fafbfc;
+      font-size:12px;
+      line-height:1;
+    }
+    .open{
+      margin-top:auto;
+      padding-top:18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      color:var(--accent-2);
+      font-weight:900;
+      font-size:14px;
+    }
+    .empty{
+      grid-column:1/-1;
+      min-height:180px;
+      display:grid;
+      place-items:center;
+      border:1px dashed #b8c2cf;
+      border-radius:8px;
+      color:var(--muted);
+      background:#fff;
+      text-align:center;
+      padding:24px;
+    }
+    @media(max-width:1050px){
+      .shell{grid-template-columns:1fr}
+      .sidebar{position:relative;top:auto;min-height:auto}
+      .nav{grid-template-columns:repeat(4,minmax(0,1fr))}
+      .admin{margin-top:4px}
+      .course-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media(max-width:720px){
+      .shell{width:min(100% - 24px,1240px);padding-top:14px}
+      .topbar{display:grid}
+      .tools,.search{width:100%}
+      .summary{grid-template-columns:1fr}
+      .course-grid,.nav{grid-template-columns:1fr}
+      .title-block h2{font-size:28px}
+    }
   </style>
 </head>
 <body>
-  <main>
-    <header>
-      <div>
-        <h1>Latest Courseware</h1>
-        <p>最新课件已部署到 Render。选择一个课件开始。</p>
+  <main class="shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="mark">悦</div>
+        <h1>Yiyue Chinese Courseware</h1>
+        <p class="sub">课程入口、学生访问和后台管理集中在这里。</p>
       </div>
-      <a class="admin" href="/admin">管理员后台</a>
-    </header>
-    <section class="grid">
-      <a class="card" href="lessons/culture/duanwu-v28.html">
-        <div class="eyebrow">Culture · Dragon Boat Festival</div>
-        <h2>端午节 · 龙舟与粽子</h2>
-        <p>端午节文化主题互动课件，含龙舟、粽子和节日表达。</p>
-        <div class="meta"><span>端午节</span><span>文化</span><span>V28</span></div>
-        <div class="button">打开课件 →</div>
-      </a>
-      <a class="card" href="lessons/travel/xian-travel.html">
-        <div class="eyebrow">New Target Chinese Speaking 2 · Unit 6</div>
-        <h2>谈旅游｜西安旅游</h2>
-        <p>新目标汉语口语 2 第六单元，西安旅行主题互动课件。</p>
-        <div class="meta"><span>旅游</span><span>西安</span><span>Speaking</span></div>
-        <div class="button">打开课件 →</div>
-      </a>
-      <a class="card" href="lessons/speaking/restaurant-ordering.html">
-        <div class="eyebrow">CFL · Restaurant Ordering</div>
-        <h2>饭店点餐</h2>
-        <p>餐厅点餐与饮食文化主题互动课件。</p>
-        <div class="meta"><span>点餐</span><span>餐厅</span><span>Speaking</span></div>
-        <div class="button">打开课件 →</div>
-      </a>
+      <nav class="nav" aria-label="课程分类">
+        <button class="active" data-filter="all">全部课程 <span class="count">3</span></button>
+        <button data-filter="culture">文化专题 <span class="count">1</span></button>
+        <button data-filter="travel">旅游表达 <span class="count">1</span></button>
+        <button data-filter="speaking">场景口语 <span class="count">1</span></button>
+      </nav>
+      <a class="admin" href="/admin">管理员后台 <span class="count">密码</span></a>
+    </aside>
+
+    <section class="content">
+      <div class="topbar">
+        <div class="title-block">
+          <h2>课程库</h2>
+          <p>选择课件后输入学生访问密码即可打开。</p>
+        </div>
+        <div class="tools">
+          <input class="search" id="search" placeholder="搜索课件、主题或标签" />
+        </div>
+      </div>
+
+      <section class="summary" aria-label="课程统计">
+        <div class="metric"><b>3</b><span>已发布课件</span></div>
+        <div class="metric"><b>1</b><span>统一学生密码</span></div>
+        <div class="metric"><b>Render</b><span>自动部署中</span></div>
+      </section>
+
+      <section class="course-grid" id="courseGrid">
+        <a class="course" data-category="culture" data-search="端午节 龙舟 粽子 文化 duanwu festival" href="lessons/culture/duanwu-v28.html">
+          <div class="thumb duanwu"></div>
+          <div class="course-body">
+            <div class="label">文化专题</div>
+            <h3>端午节 · 龙舟与粽子</h3>
+            <p>用节日故事、场景表达和文化任务进入端午主题。</p>
+            <div class="tags"><span>端午节</span><span>文化</span><span>V28</span></div>
+            <div class="open">打开课件 <span>→</span></div>
+          </div>
+        </a>
+
+        <a class="course" data-category="travel" data-search="谈旅游 西安 旅行 新目标汉语口语 unit 6 travel xian" href="lessons/travel/xian-travel.html">
+          <div class="thumb xian"></div>
+          <div class="course-body">
+            <div class="label">旅游表达</div>
+            <h3>谈旅游｜西安旅游</h3>
+            <p>围绕西安行程、景点推荐和旅行表达做口语练习。</p>
+            <div class="tags"><span>西安</span><span>旅游</span><span>Unit 6</span></div>
+            <div class="open">打开课件 <span>→</span></div>
+          </div>
+        </a>
+
+        <a class="course" data-category="speaking" data-search="饭店 点餐 餐厅 菜单 饮食文化 restaurant ordering speaking" href="lessons/speaking/restaurant-ordering.html">
+          <div class="thumb restaurant"></div>
+          <div class="course-body">
+            <div class="label">场景口语</div>
+            <h3>饭店点餐</h3>
+            <p>从入座、看菜单、点菜到表达口味，完成一组餐厅任务。</p>
+            <div class="tags"><span>点餐</span><span>餐厅</span><span>Speaking</span></div>
+            <div class="open">打开课件 <span>→</span></div>
+          </div>
+        </a>
+      </section>
     </section>
   </main>
+  <script>
+    const buttons = [...document.querySelectorAll('[data-filter]')];
+    const cards = [...document.querySelectorAll('.course')];
+    const search = document.getElementById('search');
+    let active = 'all';
+
+    function applyFilters(){
+      const q = search.value.trim().toLowerCase();
+      let shown = 0;
+      cards.forEach(card => {
+        const matchCategory = active === 'all' || card.dataset.category === active;
+        const matchText = !q || card.dataset.search.toLowerCase().includes(q) || card.textContent.toLowerCase().includes(q);
+        const visible = matchCategory && matchText;
+        card.style.display = visible ? '' : 'none';
+        if (visible) shown += 1;
+      });
+      let empty = document.querySelector('.empty');
+      if (!shown) {
+        if (!empty) {
+          empty = document.createElement('div');
+          empty.className = 'empty';
+          empty.textContent = '没有找到匹配的课件。';
+          document.getElementById('courseGrid').appendChild(empty);
+        }
+      } else if (empty) {
+        empty.remove();
+      }
+    }
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        active = button.dataset.filter;
+        buttons.forEach(item => item.classList.toggle('active', item === button));
+        applyFilters();
+      });
+    });
+    search.addEventListener('input', applyFilters);
+  </script>
 </body>
 </html>
