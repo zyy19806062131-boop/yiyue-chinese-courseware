@@ -13,6 +13,18 @@
       ]
     },
     {
+      "id": "lessons-culture-sushi-history",
+      "title": "苏轼的「重生」",
+      "path": "lessons/culture/sushi-history.html",
+      "enabled": true,
+      "password_hashes": [
+        "a73a5a1e7fc9bd069598751bee9a5ce559dcd96d73866a5f51a1a20c2cac498f"
+      ],
+      "passwords": [
+        "yiyue2026"
+      ]
+    },
+    {
       "id": "lessons-speaking-restaurant-ordering",
       "title": "饭店点餐",
       "path": "lessons/speaking/restaurant-ordering.html",

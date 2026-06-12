@@ -15,6 +15,21 @@
     "search": "端午节 龙舟 粽子 文化 duanwu festival"
   },
   {
+    "id": "sushi-history",
+    "title": "苏轼的「重生」",
+    "category": "culture",
+    "categoryName": "文化专题",
+    "subtitle": "从乌台诗案到东坡居士，用电影式场景理解苏轼与《定风波》。",
+    "path": "lessons/culture/sushi-history.html",
+    "tags": [
+      "苏轼",
+      "定风波",
+      "宋代"
+    ],
+    "thumbnail": "assets/sushi-history/01-cover-river.jpg",
+    "search": "苏轼 重生 乌台诗案 东坡居士 定风波 宋代 sushi su shi dongpo history"
+  },
+  {
     "id": "xian-travel",
     "title": "谈旅游｜西安旅游",
     "category": "travel",

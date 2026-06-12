@@ -8,6 +8,7 @@ library.
 | Category | Title | Path |
 | --- | --- | --- |
 | 文化专题 | 端午节 · 龙舟与粽子 | `lessons/culture/duanwu-v28.html` |
+| 文化专题 | 苏轼的「重生」 | `lessons/culture/sushi-history.html` |
 | 旅游表达 | 谈旅游｜西安旅游 | `lessons/travel/xian-travel.html` |
 | 场景口语 | 饭店点餐 | `lessons/speaking/restaurant-ordering.html` |
 | 少儿中文 | YCT3 L3 · 我在画画儿呢 | `YCT3_L3_GAME_v6_experience_upgrade.html` |
@@ -22,14 +23,15 @@ library.
 `data/access_rules.json` protects all public library lessons plus legacy wrapper
 or redirect paths kept for old links.
 
-The default student password is stored as a SHA-256 hash, not plaintext.
+The default student password is stored as plaintext for admin display plus a
+SHA-256 hash for login checks.
 
 ## Add A New HTML Courseware File
 
 1. Put the HTML file under a stable path, preferably `lessons/<category>/`.
 2. Put any images/audio under `assets/<lesson-name>/` unless the HTML is fully self-contained.
 3. Add the lesson to `data/course_catalog.json` if it should appear on the homepage.
-4. Add the lesson path to `data/access_rules.json` with the current password hash.
+4. Add the lesson path to `data/access_rules.json` with the current password and hash.
 5. Commit and push to GitHub.
 6. Let Render redeploy from `main`.
 
