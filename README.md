@@ -1,6 +1,6 @@
-# Yiyue Chinese Courseware
+# Yiyue Chinese HTML
 
-This repository hosts the Yiyue Chinese courseware library deployed on Render.
+This repository hosts the Yiyue Chinese HTML courseware library deployed on Render.
 
 Live site:
 
@@ -8,6 +8,19 @@ Live site:
 - Admin dashboard: <https://yiyue-chinese-courseware.onrender.com/admin>
 
 The Render service is `yiyue-Chinese-courseware`.
+
+## Short Links
+
+- 端午节 · 龙舟与粽子: <https://yiyue-chinese-courseware.onrender.com/duanwu>
+- 苏轼的「重生」: <https://yiyue-chinese-courseware.onrender.com/sushi>
+- 谈旅游｜西安旅游: <https://yiyue-chinese-courseware.onrender.com/xian>
+- 饭店点餐: <https://yiyue-chinese-courseware.onrender.com/restaurant>
+- YCT3 L3 · 我在画画儿呢: <https://yiyue-chinese-courseware.onrender.com/yct3>
+- 百家争鸣: <https://yiyue-chinese-courseware.onrender.com/baijia>
+- 你好，邻居！: <https://yiyue-chinese-courseware.onrender.com/nihao>
+- 7 Topics Speaking Lounge: <https://yiyue-chinese-courseware.onrender.com/tamila>
+- HSKK 看图说话 · 进阶刷量: <https://yiyue-chinese-courseware.onrender.com/hskk>
+- Niki HSKK 看图说话: <https://yiyue-chinese-courseware.onrender.com/niki>
 
 ## What Is Here
 

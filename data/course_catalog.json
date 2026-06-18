@@ -6,6 +6,7 @@
     "categoryName": "文化专题",
     "subtitle": "用节日故事、场景表达和文化任务进入端午主题。",
     "path": "lessons/culture/duanwu-v28.html",
+    "shortPath": "/duanwu",
     "tags": [
       "端午节",
       "文化",
@@ -21,6 +22,7 @@
     "categoryName": "文化专题",
     "subtitle": "从乌台诗案到东坡居士，用电影式场景理解苏轼与《定风波》。",
     "path": "lessons/culture/sushi-history.html",
+    "shortPath": "/sushi",
     "tags": [
       "苏轼",
       "定风波",
@@ -36,6 +38,7 @@
     "categoryName": "旅游表达",
     "subtitle": "围绕西安行程、景点推荐和旅行表达做口语练习。",
     "path": "lessons/travel/xian-travel.html",
+    "shortPath": "/xian",
     "tags": [
       "西安",
       "旅游",
@@ -51,6 +54,7 @@
     "categoryName": "场景口语",
     "subtitle": "从入座、看菜单、点菜到表达口味，完成一组餐厅任务。",
     "path": "lessons/speaking/restaurant-ordering.html",
+    "shortPath": "/restaurant",
     "tags": [
       "点餐",
       "餐厅",
@@ -66,6 +70,7 @@
     "categoryName": "少儿中文",
     "subtitle": "Minecraft 风格任务地图课件，练习正在进行的动作表达。",
     "path": "YCT3_L3_GAME_v6_experience_upgrade.html",
+    "shortPath": "/yct3",
     "tags": [
       "YCT3",
       "游戏化",
@@ -81,6 +86,7 @@
     "categoryName": "文化专题",
     "subtitle": "乱世里的四种秩序方案，中国思想文化专题互动页。",
     "path": "baijiazhengmingV24.html",
+    "shortPath": "/baijia",
     "tags": [
       "历史",
       "文化",
@@ -96,6 +102,7 @@
     "categoryName": "场景口语",
     "subtitle": "搬进新公寓后和邻居打招呼、介绍自己、加微信。",
     "path": "changjingkouyu/lesson01/lesson01_nihao_neighbor_final_v10_audio_fixed.html",
+    "shortPath": "/nihao",
     "tags": [
       "邻居",
       "介绍",
@@ -111,6 +118,7 @@
     "categoryName": "场景口语",
     "subtitle": "HSK3-4 口语主题训练，围绕多个话题展开表达。",
     "path": "TAMILA%20.html",
+    "shortPath": "/tamila",
     "tags": [
       "HSK3-4",
       "Speaking",
@@ -126,6 +134,7 @@
     "categoryName": "场景口语",
     "subtitle": "12 个高信息量图片场景，支持默想、倒计时和录音记忆。",
     "path": "lessons/speaking/hskk-picture-speaking-advanced-02.html.html",
+    "shortPath": "/hskk",
     "tags": [
       "HSKK",
       "看图说话",
@@ -141,6 +150,7 @@
     "categoryName": "场景口语",
     "subtitle": "大屏优化三栏工具箱，支持录音记忆与看图说话练习。",
     "path": "lessons/speaking/niki-hskk-toolbox.html",
+    "shortPath": "/niki",
     "tags": [
       "HSKK",
       "工具箱",

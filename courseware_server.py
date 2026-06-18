@@ -17,6 +17,7 @@ from urllib.parse import parse_qs, unquote, urlparse
 
 ROOT = Path(__file__).resolve().parent
 RULES_PATH = ROOT / "data" / "access_rules.json"
+CATALOG_PATH = ROOT / "data" / "course_catalog.json"
 SESSION_SECRET = os.environ.get("SESSION_SECRET") or secrets.token_hex(32)
 DEFAULT_ADMIN_PASSWORD_HASH = "d13d2bff8c84535fa795b6b034d05a71210c189ec9e973b99feb3db830a8041e"
 ADMIN_PASSWORD_HASH = os.environ.get("ADMIN_PASSWORD_HASH", DEFAULT_ADMIN_PASSWORD_HASH)
@@ -73,6 +74,11 @@ def read_rules():
     return {"lessons": lessons}
 
 
+def read_catalog():
+    data = safe_json_load(CATALOG_PATH, [])
+    return data if isinstance(data, list) else []
+
+
 def write_rules(rules):
     RULES_PATH.parent.mkdir(parents=True, exist_ok=True)
     tmp = RULES_PATH.with_suffix(".json.tmp")
@@ -89,6 +95,27 @@ def normalize_lesson_path(path):
     if ".." in Path(path).parts:
         return ""
     return path
+
+
+def normalize_short_path(path):
+    path = "/" + str(path or "").strip().lstrip("/")
+    if path in {"/", "/admin"}:
+        return ""
+    if path.endswith(".html") or ".." in Path(path).parts:
+        return ""
+    return path
+
+
+def lesson_path_for_short_request(request_path):
+    request_path = normalize_short_path(request_path)
+    if not request_path:
+        return ""
+    for item in read_catalog():
+        if normalize_short_path(item.get("shortPath", "")) == request_path:
+            lesson_path = normalize_lesson_path(item.get("path", ""))
+            if lesson_path:
+                return "/" + lesson_path
+    return ""
 
 
 def discover_html_lessons():
@@ -132,6 +159,20 @@ def lesson_for_request(request_path):
         if lesson["path"] == rel:
             return lesson
     return None
+
+
+def redirect_after_login(path, lesson):
+    path = str(path or "").strip()
+    if not path:
+        return "/" + lesson["path"]
+    if not path.startswith("/"):
+        path = "/" + path
+    if path == "/" + lesson["path"]:
+        return path
+    alias_target = lesson_path_for_short_request(path)
+    if alias_target == "/" + lesson["path"]:
+        return path
+    return "/" + lesson["path"]
 
 
 def sign_session(payload):
@@ -186,7 +227,7 @@ def error_page(title, message):
 </html>"""
 
 
-def lesson_login_page(lesson, error=""):
+def lesson_login_page(lesson, error="", next_path=""):
     title = lesson["title"]
     return f"""<!doctype html>
 <html lang="zh-CN">
@@ -207,11 +248,12 @@ def lesson_login_page(lesson, error=""):
 </head>
 <body>
   <main>
-    <div class="eyebrow">Courseware Access</div>
+    <div class="eyebrow">Yiyue Chinese HTML</div>
     <h1>{html.escape(title)}</h1>
     <p>请输入老师设置的访问密码。</p>
     <form method="post" action="/api/lesson-login">
       <input type="hidden" name="path" value="{html.escape(lesson["path"])}">
+      <input type="hidden" name="next" value="{html.escape(next_path)}">
       <label for="password">访问密码</label>
       <input id="password" name="password" type="password" autocomplete="current-password" autofocus>
       <div class="row"><button type="submit">打开课件</button><a href="/">返回首页</a></div>
@@ -460,6 +502,7 @@ class CoursewareHandler(BaseHTTPRequestHandler):
         body = self.read_body(limit=8192)
         path = normalize_lesson_path(body.get("path", ""))
         password = str(body.get("password", ""))
+        next_path = str(body.get("next", ""))
         lesson = lesson_for_request("/" + path)
         if not lesson:
             self.send_html(HTTPStatus.NOT_FOUND, error_page("没有找到课件", "这个课件路径不存在。"))
@@ -480,7 +523,7 @@ class CoursewareHandler(BaseHTTPRequestHandler):
         allowed.add(lesson["path"])
         session["lessons"] = sorted(allowed)
         self.send_response(HTTPStatus.SEE_OTHER)
-        self.send_header("Location", "/" + lesson["path"])
+        self.send_header("Location", redirect_after_login(next_path, lesson))
         self.send_header("Set-Cookie", session_cookie(session))
         self.send_header("Content-Length", "0")
         self.end_headers()
@@ -583,8 +626,11 @@ class CoursewareHandler(BaseHTTPRequestHandler):
         self.send_json(HTTPStatus.OK, {"lessons": payload})
 
     def serve_path(self, request_path, include_body=True):
+        original_request_path = request_path
         if request_path == "/":
             request_path = "/index.html"
+        else:
+            request_path = lesson_path_for_short_request(request_path) or request_path
 
         target = (ROOT / request_path.lstrip("/")).resolve()
         if (
@@ -605,7 +651,7 @@ class CoursewareHandler(BaseHTTPRequestHandler):
             if lesson.get("enabled", True):
                 session = self.current_session()
                 if lesson["path"] not in set(session.get("lessons", [])):
-                    self.send_html(HTTPStatus.OK, lesson_login_page(lesson))
+                    self.send_html(HTTPStatus.OK, lesson_login_page(lesson, next_path=original_request_path))
                     return
 
         self.send_static(target, include_body=include_body)
