@@ -11,3 +11,4 @@ _audio_tmp/
 
 # Local generated backups are useful on disk but should not be published.
 backups/
+.codex/
