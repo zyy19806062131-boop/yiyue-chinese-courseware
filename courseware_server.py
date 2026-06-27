@@ -129,7 +129,8 @@ def discover_html_lessons():
             continue
         title = rel
         try:
-            head = target.read_text(encoding="utf-8", errors="ignore")[:4096]
+            with target.open("rb") as f:
+                head = f.read(4096).decode("utf-8", errors="ignore")
             start = head.lower().find("<title>")
             end = head.lower().find("</title>")
             if 0 <= start < end:
